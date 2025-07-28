@@ -3,6 +3,7 @@ import styles from './styles/create-account.module.css'
 import type { UserData } from './interfaces/user-data.interface';
 import logo from '../../../assets/my_statement-logo.png';
 import mainImage from '../../../assets/login-register-image.png';
+import CreateAccountForm from './components/CreateAccountForm';
 
 export default function CreateAccount() {
   const [formData, setFormData] = useState<UserData>({
@@ -65,75 +66,14 @@ export default function CreateAccount() {
   return (
     <div className={styles.container}>
       <div className={styles.leftSide}>
-        <img src={logo} alt="logo" />
-        <img src={mainImage} alt="register" />
+        <img src={logo} alt="Logo" className={styles.logo} />
+        <img src={mainImage} alt="Main" className={styles.mainImage} />
       </div>
+
       <div className={styles.rightSide}>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <h1 className={styles.title}>Criar Conta</h1>
-
-          <div className={styles.field}>
-            <label htmlFor="userid">Email</label>
-            <input
-              type="email"
-              id="userid"
-              name="userid"
-              value={formData.userid}
-              onChange={handleChange}
-              className={fieldErrors.userid ? styles.inputError : ''}
-              required
-            />
-            {fieldErrors.userid && <span className={styles.error}>{fieldErrors.userid}</span>}
-          </div>
-
-          <div className={styles.field}>
-            <label htmlFor="password">Senha</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className={fieldErrors.password ? styles.inputError : ''}
-              required
-            />
-            {fieldErrors.password && <span className={styles.error}>{fieldErrors.password}</span>}
-          </div>
-
-          <div className={styles.field}>
-            <label htmlFor="fullname">Nome Completo</label>
-            <input
-              type="text"
-              id="fullname"
-              name="fullname"
-              value={formData.fullname}
-              onChange={handleChange}
-              className={fieldErrors.fullname ? styles.inputError : ''}
-              required
-            />
-            {fieldErrors.fullname && <span className={styles.error}>{fieldErrors.fullname}</span>}
-          </div>
-
-          <div className={styles.field}>
-            <label htmlFor="birthdate">Data de Nascimento</label>
-            <input
-              type="date"
-              id="birthdate"
-              name="birthdate"
-              value={formData.birthdate}
-              onChange={handleChange}
-              className={fieldErrors.birthdate ? styles.inputError : ''}
-              required
-            />
-            {fieldErrors.birthdate && <span className={styles.error}>{fieldErrors.birthdate}</span>}
-          </div>
-
-          <button type="submit" disabled={loading} className={styles.button}>
-            {loading ? 'Criando...' : 'Criar Conta'}
-          </button>
-
-          {message && <p className={styles.message}>{message}</p>}
-        </form>
+        <div className={styles.formContainer}>
+          <CreateAccountForm />
+        </div>
       </div>
     </div>
   );
