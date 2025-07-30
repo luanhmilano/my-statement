@@ -2,14 +2,36 @@ import { useForm } from 'react-hook-form';
 import styles from '../styles/create-account-form.module.css';
 import { createAccountSchema, type CreateAccountData } from '../../../schemas/createAccountSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+import { createUser } from '../../services/api';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function CreateAccountForm() {
   const { register, handleSubmit, formState: { errors } } = useForm<CreateAccountData>({
     resolver: zodResolver(createAccountSchema),
   });
 
-  const onSubmit = (data: CreateAccountData) => {
-    console.log("Form data: ", data);
+  const onSubmit = async (data: CreateAccountData) => {
+    const payload = {
+      userid: data.email,
+      password: data.password,
+      fullname: `${data.firstName} ${data.lastName}`,
+      birthdate: data.birthdate
+    };
+
+    try {
+      await createUser(payload);
+      toast.success('Usuário Criado!');
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error) && error.response?.status === 422) {
+        const detail = error.response.data.detail;
+        console.warn("Validation error from API:", detail);
+        toast.error('Erro de validação. Cheque os dados.');
+      } else {
+        console.error("Unexpected error:", error);
+        toast.error('Opa! Algo errado aconteceu.');
+      }
+    }
   }
 
   return (
@@ -47,17 +69,31 @@ export default function CreateAccountForm() {
         </div>
       </div>
 
-      <div className={styles.field}>
-        <label className={styles.label}>E-mail</label>
-        <span className={styles.inputContainer}>
-          <input
-            type="email"
-            className={styles.input}
-            placeholder="Enter your e-mail"
-            {...register("email")}
-          />
-          {errors.email && <span className={styles.error}>{errors.email.message}</span>}
-        </span>
+      <div className={styles.row}>
+        <div className={styles.fieldColumn}>
+          <label className={styles.label}>E-mail</label>
+          <span className={styles.inputContainer}>
+            <input
+              type="email"
+              className={styles.input}
+              placeholder="Enter your e-mail"
+              {...register("email")}
+            />
+            {errors.email && <span className={styles.error}>{errors.email.message}</span>}
+          </span>
+        </div>
+
+        <div className={styles.fieldColumn}>
+          <label className={styles.label}>Birth Date</label>
+          <span className={styles.inputContainer}>
+            <input
+              type="date"
+              className={styles.input}
+              {...register("birthdate")}
+            />
+            {errors.birthdate && <span className={styles.error}>{errors.birthdate.message}</span>}
+          </span>
+        </div>
       </div>
 
       <div className={styles.field}>
@@ -89,6 +125,7 @@ export default function CreateAccountForm() {
       <button type="submit" className={styles.button}>
         Create Account
       </button>
+      <ToastContainer />
     </form>
   );
 }

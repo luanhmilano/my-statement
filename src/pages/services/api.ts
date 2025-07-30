@@ -12,11 +12,12 @@ export const createUser = async (userData: UserData): Promise<void> => {
         });
         console.log("Create user response:", response.data);
         if (response.status === 422) {
-            // Tratar Validation Error
+            throw new Error('Validation error');
         }
+
         return response.data;
     } catch (error) {
         console.error("Create user error:", error);
-        
+        throw error;
     }
 }
