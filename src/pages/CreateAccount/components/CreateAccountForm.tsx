@@ -5,8 +5,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { createUser } from '../../services/api';
 import { ToastContainer, toast } from 'react-toastify';
+import { useState } from 'react';
+import { Spinner } from '../../../components/Spinner';
 
 export default function CreateAccountForm() {
+  const [isLoading, setIsLoading] = useState(false);
+
   const { register, handleSubmit, formState: { errors } } = useForm<CreateAccountData>({
     resolver: zodResolver(createAccountSchema),
   });
@@ -20,6 +24,7 @@ export default function CreateAccountForm() {
     };
 
     try {
+      setIsLoading(true);
       await createUser(payload);
       toast.success('Usuário Criado!');
     } catch (error: unknown) {
@@ -31,6 +36,8 @@ export default function CreateAccountForm() {
         console.error("Unexpected error:", error);
         toast.error('Opa! Algo errado aconteceu.');
       }
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -122,8 +129,8 @@ export default function CreateAccountForm() {
         </span>
       </div>
 
-      <button type="submit" className={styles.button}>
-        Create Account
+      <button type="submit" className={styles.button} disabled={isLoading}>
+        {isLoading ? <Spinner /> : "Create Account"}
       </button>
       <ToastContainer />
     </form>
