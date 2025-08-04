@@ -1,5 +1,6 @@
 import axios from "axios"
 import type { UserData } from "../CreateAccount/interfaces/user-data.interface";
+import type { UserAuthData } from "../Login/interfaces/user-auth-data.interface";
 
 const USERS_URL: string = import.meta.env.VITE_USERS_URL;
 
@@ -11,13 +12,26 @@ export const createUser = async (userData: UserData): Promise<void> => {
             },
         });
         console.log("Create user response:", response.data);
-        if (response.status === 422) {
-            throw new Error('Validation error');
-        }
-
-        return response.data;
     } catch (error) {
         console.error("Create user error:", error);
+        throw error;
+    }
+}
+
+const AUTH_URL: string = import.meta.env.VITE_AUTH_URL;
+
+export const authUser = async (authData: UserAuthData): Promise<string> => {
+    try {
+        const response = await axios.post(AUTH_URL, JSON.stringify(authData), {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        console.log("Auth response:", response.data);
+
+        return response.data.access_token;
+    } catch (error) {
+        console.error("Auth user error:", error);
         throw error;
     }
 }
