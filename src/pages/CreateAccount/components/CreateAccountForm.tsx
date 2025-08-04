@@ -7,9 +7,11 @@ import { createUser } from '../../services/api';
 import { ToastContainer, toast } from 'react-toastify';
 import { useState } from 'react';
 import { Spinner } from '../../../components/Spinner';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateAccountForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const { register, handleSubmit, formState: { errors } } = useForm<CreateAccountData>({
     resolver: zodResolver(createAccountSchema),
@@ -27,6 +29,7 @@ export default function CreateAccountForm() {
       setIsLoading(true);
       await createUser(payload);
       toast.success('Usuário Criado!');
+      navigate('/dashboard');
     } catch (error: unknown) {
       if (axios.isAxiosError(error) && error.response?.status === 422) {
         const detail = error.response.data.detail;
