@@ -1,9 +1,9 @@
-import styles from './styles/create-account.module.css'
+import styles from './styles/login.module.css';
 import logo from '../../../assets/my_statement-logo.png';
 import mainImage from '../../../assets/login-register-image.png';
-import CreateAccountForm from './components/CreateAccountForm';
+import LoginForm from './components/LoginForm';
 
-export default function CreateAccount() {
+export default function Login() {
   return (
     <div className={styles.container}>
       <div className={styles.leftSide}>
@@ -13,7 +13,7 @@ export default function CreateAccount() {
 
       <div className={styles.rightSide}>
         <div className={styles.formContainer}>
-          <CreateAccountForm />
+          <LoginForm />
         </div>
       </div>
     </div>
