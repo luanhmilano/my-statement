@@ -1,9 +1,15 @@
 import axios from "axios"
-import type { UserData } from "../pages/register/interfaces/user-data.interface";
 
 export interface UserAuthData {
     userid: string,
     password: string
+}
+
+export interface UserData {
+  userid: string;
+  password: string;
+  fullname: string;
+  birthdate: string;
 }
 
 const USERS_URL: string = import.meta.env.VITE_USERS_URL;
