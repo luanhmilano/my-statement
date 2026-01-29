@@ -1,50 +1,16 @@
-import axios from 'axios';
 import styles from '../styles/login-form.module.css';
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod';
-import { authUser } from '../../services/api';
-import { ToastContainer, toast } from 'react-toastify';
-import { useState } from 'react';
-import { Spinner } from '../../../components/Spinner';
-import { useNavigate } from 'react-router-dom';
-import { loginSchema, type LoginData } from '../../../schemas/loginSchema';
-import { useAuth } from '../../../auth/hooks/useAuth';
+import { ToastContainer } from 'react-toastify';
+import { Spinner } from '../../../../components/Spinner';
+import type { FormProps } from '../../types';
 
-export default function LoginForm() {
-  const [isLoading, setIsLoading] = useState(false);
-  const { login } = useAuth();
-  const navigate = useNavigate();
-
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginData>({
-    resolver: zodResolver(loginSchema),
-  });
-
-  const onSubmit = async (data: LoginData) => {
-    const payload = {
-      userid: data.email,
-      password: data.password
-    };
-
-    try {
-      setIsLoading(true);
-      const token = await authUser(payload);
-      login(token);
-      toast.success('Login realizado com sucesso!');
-      navigate('/dashboard');
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error) && error.response?.status === 422) {
-        const detail = error.response.data.detail;
-        console.warn("Validation error from API:", detail);
-        toast.error('Erro de validação. Cheque os dados.');
-      } else {
-        console.error("Unexpected error:", error);
-        toast.error('Credenciais inválidas.');
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
+export default function LoginForm({
+    onSubmit,
+    isLoading,
+    register,
+    handleSubmit,
+    errors,
+    navigate,
+}: FormProps) {
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <h1 className={styles.title}>Log in</h1>

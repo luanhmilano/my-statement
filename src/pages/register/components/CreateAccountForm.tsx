@@ -3,7 +3,7 @@ import styles from '../styles/create-account-form.module.css';
 import { createAccountSchema, type CreateAccountData } from '../../../schemas/createAccountSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
-import { createUser } from '../../services/api';
+import { createUser } from '../../../services/api';
 import { ToastContainer, toast } from 'react-toastify';
 import { useState } from 'react';
 import { Spinner } from '../../../components/Spinner';
