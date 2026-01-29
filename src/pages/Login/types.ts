@@ -1,4 +1,4 @@
-import type { LoginData } from "../../schemas/login.schema";
+import type { LoginData } from "./utils/login-schema";
 
 export interface LoginFormProps {
     onSubmit: (data: LoginData) => Promise<void>;

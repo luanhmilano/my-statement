@@ -1,4 +1,4 @@
-import styles from '../styles/login-form.module.css';
+import styles from '../../styles/login-form.module.css';
 import { ToastContainer } from 'react-toastify';
 import { Spinner } from '../../../../components/spinner';
 import type { LoginFormProps } from '../../types';

@@ -7,7 +7,7 @@ import RegisterController from './pages/register/index.page';
 export function RouterProvider() {
   const routes = [
     {
-      path: RoutesUrls.LOGIN,
+      path: RoutesUrls.BASE_URL,
       element: <LoginController />,
     },
     {

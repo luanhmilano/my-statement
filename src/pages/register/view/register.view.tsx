@@ -1,6 +1,6 @@
-import styles from './styles/create-account.module.css'
-import logo from '../../../assets/my_statement-logo.png';
-import mainImage from '../../../assets/login-register-image.png';
+import styles from '../styles/register.module.css';
+import logo from '../../../../assets/my_statement-logo.png';
+import mainImage from '../../../../assets/login-register-image.png';
 import RegisterForm from '../components/register-form';
 import type { RegisterFormProps } from '../types';
 

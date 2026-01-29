@@ -1,6 +1,6 @@
-import styles from './styles/login.module.css';
-import logo from '../../../assets/my_statement-logo.png';
-import mainImage from '../../../assets/login-register-image.png';
+import styles from '../styles/login.module.css';
+import logo from '../../../../assets/my_statement-logo.png';
+import mainImage from '../../../../assets/login-register-image.png';
 import LoginForm from '../components/login-form';
 import type { LoginFormProps } from '../types';
 

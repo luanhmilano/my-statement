@@ -1,4 +1,4 @@
-import styles from '../styles/create-account-form.module.css';
+import styles from '../../styles/register-form.module.css';
 import { ToastContainer } from 'react-toastify';
 import { Spinner } from '../../../../components/spinner';
 import type { RegisterFormProps } from '../../types';
