@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { AuthContext } from "./auth-context";
+import { AuthContext } from "./auth.context";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setToken] = useState<string | null>(() => {

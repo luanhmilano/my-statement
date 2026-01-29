@@ -1,11 +1,14 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { RoutesUrls } from './utils/enums/routes-url';
 
-import LoginController from './pages/login/index.page';
-import RegisterController from './pages/register/index.page';
+import LoginController from '@/pages/login/index.page';
+import RegisterController from '@/pages/register/index.page';
+import DashboardController from '@/pages/dashboard/index.page';
+import { AuthProvider } from '@/auth/auth.provider';
+import RouteGuard from '@/components/route-guard';
 
 export function RouterProvider() {
-  const routes = [
+  const publicRoutes = [
     {
       path: RoutesUrls.BASE_URL,
       element: <LoginController />,
@@ -16,13 +19,30 @@ export function RouterProvider() {
     }
   ];
 
+  const privateRoutes = [
+    {
+      path: RoutesUrls.DASHBOARD,
+      element: <DashboardController />,
+    }
+  ];
+
   return (
     <BrowserRouter>
-      <Routes>
-        {routes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          
+          {publicRoutes.map((route) => (
+            <Route key={route.path} path={route.path} element={route.element} />
+          ))}
+
+          <Route element={<RouteGuard />}>
+            {privateRoutes.map((route) => (
+              <Route key={route.path} path={route.path} element={route.element} />
+            ))}
+          </Route>
+
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

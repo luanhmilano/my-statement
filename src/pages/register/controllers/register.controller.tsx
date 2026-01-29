@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { createUser } from "../../../services/api";
 import { type RegisterData, registerSchema } from "../utils/register-schema";
 import RegisterView from "../view/register.view";
-import { RoutesUrls } from "../../../utils/enums/routes-url";
+import { RoutesUrls } from "@/utils/enums/routes-url";
 
 export default function RegisterController() {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +33,7 @@ export default function RegisterController() {
       setIsLoading(true);
       await createUser(payload);
       toast.success("User Created!");
-      navigate(RoutesUrls.DASHBOARD);
+      navigate(RoutesUrls.BASE_URL);
     } catch (error: unknown) {
       if (axios.isAxiosError(error) && error.response?.status === 422) {
         const detail = error.response.data.detail;

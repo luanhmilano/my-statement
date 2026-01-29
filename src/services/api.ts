@@ -1,18 +1,8 @@
 import axios from "axios"
+import { getConfig } from "@/utils/get-config";
+import type { UserData, UserAuthData } from "./types";
 
-export interface UserAuthData {
-    userid: string,
-    password: string
-}
-
-export interface UserData {
-  userid: string;
-  password: string;
-  fullname: string;
-  birthdate: string;
-}
-
-const USERS_URL: string = import.meta.env.VITE_USERS_URL;
+const { USERS_URL, AUTH_URL } = getConfig();
 
 export const createUser = async (userData: UserData): Promise<void> => {
     try {
@@ -27,8 +17,6 @@ export const createUser = async (userData: UserData): Promise<void> => {
         throw error;
     }
 }
-
-const AUTH_URL: string = import.meta.env.VITE_AUTH_URL;
 
 export const authUser = async (authData: UserAuthData): Promise<string> => {
     try {

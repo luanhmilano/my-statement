@@ -1,6 +1,6 @@
 import styles from '../../styles/register-form.module.css';
 import { ToastContainer } from 'react-toastify';
-import { Spinner } from '../../../../components/spinner';
+import { Spinner } from '@/components/spinner';
 import type { RegisterFormProps } from '../../types';
 
 export default function RegisterForm({

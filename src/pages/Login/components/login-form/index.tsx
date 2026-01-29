@@ -1,8 +1,8 @@
 import styles from '../../styles/login-form.module.css';
 import { ToastContainer } from 'react-toastify';
-import { Spinner } from '../../../../components/spinner';
+import { Spinner } from '@/components/spinner';
 import type { LoginFormProps } from '../../types';
-import { RoutesUrls } from '../../../../utils/enums/routes-url';
+import { RoutesUrls } from '@/utils/enums/routes-url';
 
 export default function LoginForm({
     onSubmit,
