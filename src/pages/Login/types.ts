@@ -1,6 +1,6 @@
-import type { LoginData } from "../../schemas/loginSchema";
+import type { LoginData } from "../../schemas/login.schema";
 
-export interface FormProps {
+export interface LoginFormProps {
     onSubmit: (data: LoginData) => Promise<void>;
     isLoading: boolean;
     register: ReturnType<typeof import("react-hook-form").useForm<LoginData>>['register'];

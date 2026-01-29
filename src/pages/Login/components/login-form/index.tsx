@@ -1,7 +1,8 @@
 import styles from '../styles/login-form.module.css';
 import { ToastContainer } from 'react-toastify';
-import { Spinner } from '../../../../components/Spinner';
-import type { FormProps } from '../../types';
+import { Spinner } from '../../../../components/spinner';
+import type { LoginFormProps } from '../../types';
+import { RoutesUrls } from '../../../../utils/enums/routes-url';
 
 export default function LoginForm({
     onSubmit,
@@ -10,7 +11,7 @@ export default function LoginForm({
     handleSubmit,
     errors,
     navigate,
-}: FormProps) {
+}: LoginFormProps) {
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <h1 className={styles.title}>Log in</h1>
@@ -48,7 +49,7 @@ export default function LoginForm({
         {isLoading ? <Spinner /> : "Log in"}
       </button>
       <p><strong>or</strong></p>
-      <button type="button" className={styles.buttonSecondary} onClick={() => navigate('/create-account')}>
+      <button type="button" className={styles.buttonSecondary} onClick={() => navigate(RoutesUrls.REGISTER)}>
         Create account
       </button>
       <ToastContainer />

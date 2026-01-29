@@ -1,8 +1,8 @@
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { RoutesUrls } from './utils/enums/routes-url';
 
 import LoginController from './pages/login/index.page';
+import RegisterController from './pages/register/index.page';
 
 export function RouterProvider() {
   const routes = [
@@ -10,6 +10,10 @@ export function RouterProvider() {
       path: RoutesUrls.LOGIN,
       element: <LoginController />,
     },
+    {
+      path: RoutesUrls.REGISTER,
+      element: <RegisterController />,
+    }
   ];
 
   return (

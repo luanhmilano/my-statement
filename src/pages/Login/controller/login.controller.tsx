@@ -3,12 +3,12 @@ import LoginView from "../view/login.view";
 import { useAuth } from "../../../auth/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { loginSchema, type LoginData } from "../../../schemas/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { authUser } from "../../../services/api";
 import { RoutesUrls } from "../../../utils/enums/routes-url";
+import { loginSchema, type LoginData } from "../utils/login-schema";
 
 export default function LoginController() {
   const [isLoading, setIsLoading] = useState(false);

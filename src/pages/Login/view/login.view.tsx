@@ -2,7 +2,7 @@ import styles from './styles/login.module.css';
 import logo from '../../../assets/my_statement-logo.png';
 import mainImage from '../../../assets/login-register-image.png';
 import LoginForm from '../components/login-form';
-import type { FormProps } from '../types';
+import type { LoginFormProps } from '../types';
 
 export default function LoginView({
     onSubmit,
@@ -11,7 +11,7 @@ export default function LoginView({
     handleSubmit,
     errors,
     navigate,
-}: FormProps) {
+}: LoginFormProps) {
   return (
     <div className={styles.container}>
       <div className={styles.leftSide}>
