@@ -5,7 +5,7 @@ export default function DashboardView({ logout }: DashboardProps) {
     <div style={{ padding: '2rem', textAlign: 'center' }}>
       <h1>Dashboard</h1>
       <p>Bem-vindo! Você está autenticado.</p>
-      <button 
+      <button
         onClick={logout}
         style={{
           padding: '0.5rem 1rem',
@@ -13,7 +13,7 @@ export default function DashboardView({ logout }: DashboardProps) {
           color: 'white',
           border: 'none',
           borderRadius: '4px',
-          cursor: 'pointer'
+          cursor: 'pointer',
         }}
       >
         Logout

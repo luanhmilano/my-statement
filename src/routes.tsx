@@ -15,29 +15,29 @@ export function RouterProvider() {
     {
       path: RoutesUrls.REGISTER,
       element: <RegisterController />,
-    }
+    },
   ];
 
   const privateRoutes = [
     {
       path: RoutesUrls.DASHBOARD,
       element: <DashboardController />,
-    }
+    },
   ];
 
   return (
     <BrowserRouter>
-        <Routes>
-          {publicRoutes.map((route) => (
+      <Routes>
+        {publicRoutes.map(route => (
+          <Route key={route.path} path={route.path} element={route.element} />
+        ))}
+
+        <Route element={<RouteGuard />}>
+          {privateRoutes.map(route => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
-
-          <Route element={<RouteGuard />}>
-            {privateRoutes.map((route) => (
-              <Route key={route.path} path={route.path} element={route.element} />
-            ))}
-          </Route>
-        </Routes>
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }

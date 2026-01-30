@@ -1,17 +1,17 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const registerSchema = z
-    .object({
-        lastName: z.string().min(1, "Last name is required"),
-        firstName: z.string().min(1, "First name is required"),
-        email: z.email('Invalid email address'),
-        birthdate: z.iso.date("Invalid date format"),
-        password: z.string().min(6, "Password must be at least 6 characters long"),
-        confirmPassword: z.string().min(6, "Confirm your password"),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-        message: "Passwords don't match",
-        path: ["confirmPassword"],
-    })
+  .object({
+    lastName: z.string().min(1, 'Last name is required'),
+    firstName: z.string().min(1, 'First name is required'),
+    email: z.email('Invalid email address'),
+    birthdate: z.iso.date('Invalid date format'),
+    password: z.string().min(6, 'Password must be at least 6 characters long'),
+    confirmPassword: z.string().min(6, 'Confirm your password'),
+  })
+  .refine(data => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword'],
+  });
 
 export type RegisterData = z.infer<typeof registerSchema>;

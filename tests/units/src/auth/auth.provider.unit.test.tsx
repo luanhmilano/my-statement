@@ -1,6 +1,6 @@
-import { render, screen, act } from "@testing-library/react";
-import { AuthProvider } from "@/auth/auth.provider";
-import { useAuth } from "@/auth/hooks/useAuth";
+import { render, screen, act } from '@testing-library/react';
+import { AuthProvider } from '@/auth/auth.provider';
+import { useAuth } from '@/auth/hooks/useAuth';
 
 // Mock localStorage
 const localStorageMock = {
@@ -10,7 +10,7 @@ const localStorageMock = {
   clear: vi.fn(),
 };
 
-Object.defineProperty(window, "localStorage", {
+Object.defineProperty(window, 'localStorage', {
   value: localStorageMock,
 });
 
@@ -21,9 +21,9 @@ const TestComponent = () => {
   return (
     <div>
       <span data-testid="auth-status">
-        {isAuthenticated ? "authenticated" : "not authenticated"}
+        {isAuthenticated ? 'authenticated' : 'not authenticated'}
       </span>
-      <button data-testid="login-btn" onClick={() => login("test-token")}>
+      <button data-testid="login-btn" onClick={() => login('test-token')}>
         Login
       </button>
       <button data-testid="logout-btn" onClick={() => logout()}>
@@ -33,7 +33,7 @@ const TestComponent = () => {
   );
 };
 
-describe("AuthProvider", () => {
+describe('AuthProvider', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -44,112 +44,112 @@ describe("AuthProvider", () => {
     localStorageMock.removeItem.mockClear();
   });
 
-  it("should initialize with no token when localStorage is empty", () => {
+  it('should initialize with no token when localStorage is empty', () => {
     localStorageMock.getItem.mockReturnValue(null);
 
     render(
       <AuthProvider>
         <TestComponent />
-      </AuthProvider>,
+      </AuthProvider>
     );
 
-    expect(screen.getByTestId("auth-status")).toHaveTextContent(
-      "not authenticated",
+    expect(screen.getByTestId('auth-status')).toHaveTextContent(
+      'not authenticated'
     );
-    expect(localStorageMock.getItem).toHaveBeenCalledWith("authToken");
+    expect(localStorageMock.getItem).toHaveBeenCalledWith('authToken');
   });
 
-  it("should initialize with token when localStorage has authToken", () => {
-    localStorageMock.getItem.mockReturnValue("existing-token");
+  it('should initialize with token when localStorage has authToken', () => {
+    localStorageMock.getItem.mockReturnValue('existing-token');
 
     render(
       <AuthProvider>
         <TestComponent />
-      </AuthProvider>,
+      </AuthProvider>
     );
 
-    expect(screen.getByTestId("auth-status")).toHaveTextContent(
-      "authenticated",
+    expect(screen.getByTestId('auth-status')).toHaveTextContent(
+      'authenticated'
     );
-    expect(localStorageMock.getItem).toHaveBeenCalledWith("authToken");
+    expect(localStorageMock.getItem).toHaveBeenCalledWith('authToken');
   });
 
-  it("should login user and store token in localStorage", async () => {
+  it('should login user and store token in localStorage', async () => {
     localStorageMock.getItem.mockReturnValue(null);
 
     render(
       <AuthProvider>
         <TestComponent />
-      </AuthProvider>,
+      </AuthProvider>
     );
 
-    expect(screen.getByTestId("auth-status")).toHaveTextContent(
-      "not authenticated",
+    expect(screen.getByTestId('auth-status')).toHaveTextContent(
+      'not authenticated'
     );
 
     await act(async () => {
-      screen.getByTestId("login-btn").click();
+      screen.getByTestId('login-btn').click();
     });
 
-    expect(screen.getByTestId("auth-status")).toHaveTextContent(
-      "authenticated",
+    expect(screen.getByTestId('auth-status')).toHaveTextContent(
+      'authenticated'
     );
     expect(localStorageMock.setItem).toHaveBeenCalledWith(
-      "authToken",
-      "test-token",
+      'authToken',
+      'test-token'
     );
   });
 
-  it("should logout user and remove token from localStorage", async () => {
-    localStorageMock.getItem.mockReturnValue("existing-token");
+  it('should logout user and remove token from localStorage', async () => {
+    localStorageMock.getItem.mockReturnValue('existing-token');
 
     render(
       <AuthProvider>
         <TestComponent />
-      </AuthProvider>,
+      </AuthProvider>
     );
 
-    expect(screen.getByTestId("auth-status")).toHaveTextContent(
-      "authenticated",
+    expect(screen.getByTestId('auth-status')).toHaveTextContent(
+      'authenticated'
     );
 
     await act(async () => {
-      screen.getByTestId("logout-btn").click();
+      screen.getByTestId('logout-btn').click();
     });
 
-    expect(screen.getByTestId("auth-status")).toHaveTextContent(
-      "not authenticated",
+    expect(screen.getByTestId('auth-status')).toHaveTextContent(
+      'not authenticated'
     );
-    expect(localStorageMock.removeItem).toHaveBeenCalledWith("authToken");
+    expect(localStorageMock.removeItem).toHaveBeenCalledWith('authToken');
   });
 
-  it("should show authenticated when token exists in localStorage", () => {
-    localStorageMock.getItem.mockReturnValue("some-token");
+  it('should show authenticated when token exists in localStorage', () => {
+    localStorageMock.getItem.mockReturnValue('some-token');
     render(
       <AuthProvider>
         <TestComponent />
-      </AuthProvider>,
+      </AuthProvider>
     );
 
-    expect(screen.getByTestId("auth-status")).toHaveTextContent(
-      "authenticated",
+    expect(screen.getByTestId('auth-status')).toHaveTextContent(
+      'authenticated'
     );
   });
 
-  it("should show not authenticated when no token exists in localStorage", () => {
+  it('should show not authenticated when no token exists in localStorage', () => {
     localStorageMock.getItem.mockReturnValue(null);
     render(
       <AuthProvider>
         <TestComponent />
-      </AuthProvider>,
+      </AuthProvider>
     );
 
-    expect(screen.getByTestId("auth-status")).toHaveTextContent(
-      "not authenticated",
+    expect(screen.getByTestId('auth-status')).toHaveTextContent(
+      'not authenticated'
     );
   });
 
-  it("should memoize context value correctly", () => {
+  it('should memoize context value correctly', () => {
     localStorageMock.getItem.mockReturnValue(null);
 
     const TestMemoComponent = () => {
@@ -164,9 +164,9 @@ describe("AuthProvider", () => {
     render(
       <AuthProvider>
         <TestMemoComponent />
-      </AuthProvider>,
+      </AuthProvider>
     );
 
-    expect(screen.getByTestId("memo-test")).toHaveTextContent("false");
+    expect(screen.getByTestId('memo-test')).toHaveTextContent('false');
   });
 });

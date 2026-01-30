@@ -5,12 +5,12 @@ import LoginForm from '../components/login-form';
 import type { LoginFormProps } from '../types';
 
 export default function LoginView({
-    onSubmit,
-    isLoading,
-    register,
-    handleSubmit,
-    errors,
-    navigate,
+  onSubmit,
+  isLoading,
+  register,
+  handleSubmit,
+  errors,
+  navigate,
 }: LoginFormProps) {
   return (
     <div className={styles.container}>

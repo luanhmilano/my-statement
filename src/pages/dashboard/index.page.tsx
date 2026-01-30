@@ -1,3 +1,3 @@
-import DashboardController from "./controllers/dashboard.controller";
+import DashboardController from './controllers/dashboard.controller';
 
 export default DashboardController;

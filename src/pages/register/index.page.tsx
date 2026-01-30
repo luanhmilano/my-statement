@@ -1,3 +1,3 @@
-import RegisterController from "./controllers/register.controller";
+import RegisterController from './controllers/register.controller';
 
 export default RegisterController;

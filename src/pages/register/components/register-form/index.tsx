@@ -4,13 +4,12 @@ import { Spinner } from '@/components/spinner';
 import type { RegisterFormProps } from '../../types';
 
 export default function RegisterForm({
-    register,
-    handleSubmit,
-    onSubmit,
-    isLoading,
-    errors,
+  register,
+  handleSubmit,
+  onSubmit,
+  isLoading,
+  errors,
 }: RegisterFormProps) {
-
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <h1 className={styles.title}>Create account</h1>
@@ -26,9 +25,11 @@ export default function RegisterForm({
               type="text"
               className={styles.input}
               placeholder="Enter your last name"
-              {...register("lastName")}
+              {...register('lastName')}
             />
-            {errors.lastName && <span className={styles.error}>{errors.lastName.message}</span>}
+            {errors.lastName && (
+              <span className={styles.error}>{errors.lastName.message}</span>
+            )}
           </span>
         </div>
 
@@ -39,9 +40,11 @@ export default function RegisterForm({
               type="text"
               className={styles.input}
               placeholder="Enter your first name"
-              {...register("firstName")}
+              {...register('firstName')}
             />
-            {errors.firstName && <span className={styles.error}>{errors.firstName.message}</span>}
+            {errors.firstName && (
+              <span className={styles.error}>{errors.firstName.message}</span>
+            )}
           </span>
         </div>
       </div>
@@ -54,9 +57,11 @@ export default function RegisterForm({
               type="email"
               className={styles.input}
               placeholder="Enter your e-mail"
-              {...register("email")}
+              {...register('email')}
             />
-            {errors.email && <span className={styles.error}>{errors.email.message}</span>}
+            {errors.email && (
+              <span className={styles.error}>{errors.email.message}</span>
+            )}
           </span>
         </div>
 
@@ -66,9 +71,11 @@ export default function RegisterForm({
             <input
               type="date"
               className={styles.input}
-              {...register("birthdate")}
+              {...register('birthdate')}
             />
-            {errors.birthdate && <span className={styles.error}>{errors.birthdate.message}</span>}
+            {errors.birthdate && (
+              <span className={styles.error}>{errors.birthdate.message}</span>
+            )}
           </span>
         </div>
       </div>
@@ -80,9 +87,11 @@ export default function RegisterForm({
             type="password"
             className={styles.input}
             placeholder="Enter your password"
-            {...register("password")}
+            {...register('password')}
           />
-          {errors.password && <span className={styles.error}>{errors.password.message}</span>}
+          {errors.password && (
+            <span className={styles.error}>{errors.password.message}</span>
+          )}
         </span>
       </div>
 
@@ -93,14 +102,18 @@ export default function RegisterForm({
             type="password"
             className={styles.input}
             placeholder="Confirm your password"
-            {...register("confirmPassword")}
+            {...register('confirmPassword')}
           />
-          {errors.confirmPassword && <span className={styles.error}>{errors.confirmPassword.message}</span>}
+          {errors.confirmPassword && (
+            <span className={styles.error}>
+              {errors.confirmPassword.message}
+            </span>
+          )}
         </span>
       </div>
 
       <button type="submit" className={styles.button} disabled={isLoading}>
-        {isLoading ? <Spinner /> : "Create Account"}
+        {isLoading ? <Spinner /> : 'Create Account'}
       </button>
       <ToastContainer />
     </form>

@@ -1,5 +1,5 @@
-import { useState, useMemo } from "react";
-import { AuthContext } from "./auth.context";
+import { useState, useMemo } from 'react';
+import { AuthContext } from './auth.context';
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setToken] = useState<string | null>(() => {
@@ -18,11 +18,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const isAuthenticated = !!token;
 
-  const value = useMemo(() => ({ isAuthenticated, login, logout }), [isAuthenticated]);
-
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
+  const value = useMemo(
+    () => ({ isAuthenticated, login, logout }),
+    [isAuthenticated]
   );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
