@@ -6,12 +6,11 @@ const { USERS_URL, AUTH_URL } = getConfig();
 
 export const createUser = async (userData: UserData): Promise<void> => {
   try {
-    const response = await axios.post(USERS_URL, JSON.stringify(userData), {
+    await axios.post(USERS_URL, JSON.stringify(userData), {
       headers: {
         'Content-Type': 'application/json',
       },
     });
-    console.log('Create user response:', response.data);
   } catch (error) {
     console.error('Create user error:', error);
     throw error;
@@ -25,7 +24,6 @@ export const authUser = async (authData: UserAuthData): Promise<string> => {
         'Content-Type': 'application/json',
       },
     });
-    console.log('Auth response:', response.data);
 
     return response.data.access_token;
   } catch (error) {
