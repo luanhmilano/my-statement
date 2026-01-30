@@ -1,3 +1,3 @@
-import LoginController from "./controller/login.controller";
+import LoginController from "./controllers/login.controller";
 
 export default LoginController;

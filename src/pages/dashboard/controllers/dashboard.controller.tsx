@@ -1,4 +1,4 @@
-import { useAuth } from "../../../auth/hooks/useAuth";
+import { useAuth } from "@/auth/hooks/useAuth";
 import DashboardView from "../view/dashboard.view";
 
 export default function DashboardController() {

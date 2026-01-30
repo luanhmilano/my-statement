@@ -4,7 +4,6 @@ import { RoutesUrls } from './utils/enums/routes-url';
 import LoginController from '@/pages/login/index.page';
 import RegisterController from '@/pages/register/index.page';
 import DashboardController from '@/pages/dashboard/index.page';
-import { AuthProvider } from '@/auth/auth.provider';
 import RouteGuard from '@/components/route-guard';
 
 export function RouterProvider() {
@@ -28,9 +27,7 @@ export function RouterProvider() {
 
   return (
     <BrowserRouter>
-      <AuthProvider>
         <Routes>
-          
           {publicRoutes.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
@@ -40,9 +37,7 @@ export function RouterProvider() {
               <Route key={route.path} path={route.path} element={route.element} />
             ))}
           </Route>
-
         </Routes>
-      </AuthProvider>
     </BrowserRouter>
   );
 }

@@ -1,10 +1,11 @@
 import type { RegisterData } from "./utils/register-schema";
+import type { UseFormRegister, FieldErrors, UseFormHandleSubmit } from "react-hook-form";
 
 export interface RegisterFormProps {
     onSubmit: (data: RegisterData) => Promise<void>;
     isLoading: boolean;
-    register: ReturnType<typeof import("react-hook-form").useForm<RegisterData>>['register'];
-    handleSubmit: ReturnType<typeof import("react-hook-form").useForm<RegisterData>>['handleSubmit'];
-    errors: ReturnType<typeof import("react-hook-form").useForm<RegisterData>>['formState']['errors'];
+    register: UseFormRegister<RegisterData>;
+    handleSubmit: UseFormHandleSubmit<RegisterData>;
+    errors: FieldErrors<RegisterData>;
 }
 

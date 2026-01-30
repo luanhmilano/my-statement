@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { createUser } from "../../../services/api";
+import { createUser } from "@/services/api";
 import { type RegisterData, registerSchema } from "../utils/register-schema";
 import RegisterView from "../view/register.view";
 import { RoutesUrls } from "@/utils/enums/routes-url";
