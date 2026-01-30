@@ -13,6 +13,7 @@ dist-ssr
 *.local
 readme_files/
 .env
+/coverage
 
 # Editor directories and files
 .vscode/*

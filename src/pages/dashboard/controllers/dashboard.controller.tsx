@@ -1,8 +1,8 @@
-import { useAuth } from "@/auth/hooks/useAuth";
-import DashboardView from "../view/dashboard.view";
+import { useAuth } from '@/auth/hooks/useAuth';
+import DashboardView from '../view/dashboard.view';
 
 export default function DashboardController() {
-    const { logout } = useAuth();
+  const { logout } = useAuth();
 
-    return <DashboardView logout={logout} />;
+  return <DashboardView logout={logout} />;
 }

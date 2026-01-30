@@ -8,7 +8,7 @@
 
 .leftSide {
   flex: 1;
-  background: #8E48EC;
+  background: #8e48ec;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,7 +38,8 @@
     flex-direction: column;
   }
 
-  .leftSide, .rightSide {
+  .leftSide,
+  .rightSide {
     flex: none;
     width: 100%;
     height: auto;

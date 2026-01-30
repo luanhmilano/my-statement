@@ -1,14 +1,14 @@
-import { useState } from "react";
-import LoginView from "../view/login.view";
-import { useAuth } from "@/auth/hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { toast } from "react-toastify";
-import { authUser } from "@/services/api";
-import { RoutesUrls } from "@/utils/enums/routes-url";
-import { loginSchema, type LoginData } from "../utils/login-schema";
+import { useState } from 'react';
+import LoginView from '../view/login.view';
+import { useAuth } from '@/auth/hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { authUser } from '@/services/api';
+import { RoutesUrls } from '@/utils/enums/routes-url';
+import { loginSchema, type LoginData } from '../utils/login-schema';
 
 export default function LoginController() {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,16 +33,16 @@ export default function LoginController() {
       setIsLoading(true);
       const token = await authUser(payload);
       login(token);
-      toast.success("Login successfully!");
+      toast.success('Login successfully!');
       navigate(RoutesUrls.DASHBOARD);
     } catch (error: unknown) {
       if (axios.isAxiosError(error) && error.response?.status === 422) {
         const detail = error.response.data.detail;
-        console.warn("Validation error from API:", detail);
-        toast.error("Validation error. Check the data.");
+        console.warn('Validation error from API:', detail);
+        toast.error('Validation error. Check the data.');
       } else {
-        console.error("Unexpected error:", error);
-        toast.error("Invalid credentials.");
+        console.error('Unexpected error:', error);
+        toast.error('Invalid credentials.');
       }
     } finally {
       setIsLoading(false);
@@ -58,5 +58,5 @@ export default function LoginController() {
       handleSubmit={handleSubmit}
       navigate={navigate}
     />
-  )
+  );
 }

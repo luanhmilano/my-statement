@@ -5,11 +5,11 @@ import RegisterForm from '../components/register-form';
 import type { RegisterFormProps } from '../types';
 
 export default function RegisterView({
-    register,
-    handleSubmit,
-    onSubmit,
-    isLoading,
-    errors,
+  register,
+  handleSubmit,
+  onSubmit,
+  isLoading,
+  errors,
 }: RegisterFormProps) {
   return (
     <div className={styles.container}>
@@ -20,13 +20,13 @@ export default function RegisterView({
 
       <div className={styles.rightSide}>
         <div className={styles.formContainer}>
-          <RegisterForm 
+          <RegisterForm
             register={register}
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             isLoading={isLoading}
             errors={errors}
-           />
+          />
         </div>
       </div>
     </div>
