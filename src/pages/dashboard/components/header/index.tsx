@@ -5,6 +5,12 @@ import type { HeaderProps } from '../../types';
 export default function Header({ onToggleMenu, isMobile = false }: HeaderProps) {
   return (
     <div className={styles.container}>
+      {isMobile && (
+        <button className={styles.menuButton} onClick={onToggleMenu}>
+          <LuMenu className={styles.menuIcon} />
+        </button>
+      )}
+      
       <div className={styles.searchContainer}>
         <div className={styles.searchInputWrapper}>
           <LuSearch className={styles.searchIcon} />
@@ -16,11 +22,7 @@ export default function Header({ onToggleMenu, isMobile = false }: HeaderProps) 
         </div>
       </div>
       
-      {isMobile ? (
-        <button className={styles.menuButton} onClick={onToggleMenu}>
-          <LuMenu className={styles.menuIcon} />
-        </button>
-      ) : (
+      {!isMobile && (
         <div className={styles.iconContainer}>
           <button className={styles.iconButton}>
             <span className={styles.icon}><LuSettings /></span>
