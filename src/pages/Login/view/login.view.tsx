@@ -13,7 +13,7 @@ export default function LoginView({
   navigate,
 }: LoginFormProps) {
   return (
-    <div className={styles.container}>
+    <div data-testid="login-container" className={styles.container}>
       <div className={styles.leftSide}>
         <img src={logo} alt="Logo" className={styles.logo} />
         <img src={mainImage} alt="Main" className={styles.mainImage} />
