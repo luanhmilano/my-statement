@@ -1,0 +1,44 @@
+import styles from '../../styles/side-menu.module.css';
+import logo from '@assets/my_statement-logo-black.png';
+import type { SideMenuProps } from '../../types';
+import { LuHouse, LuCreditCard, LuCircleUser, LuSettings, LuBell, LuLogOut } from "react-icons/lu";
+
+const menuItems = [
+  { id: 'home' as const, label: 'Home', icon: <LuHouse /> },
+  { id: 'statement' as const, label: 'Statement', icon: <LuCreditCard /> },
+  { id: 'profile' as const, label: 'Profile', icon: <LuCircleUser /> },
+  { id: 'settings' as const, label: 'Settings', icon: <LuSettings /> },
+  { id: 'notifications' as const, label: 'Notifications', icon: <LuBell /> },
+];
+
+export default function SideMenu({ logout, activeView, onNavigate }: SideMenuProps) {
+  return (
+    <div className={styles.container}>
+      <div className={styles.logo}>
+        <img src={logo} alt="My Statement Logo" />
+      </div>
+      
+      <ul className={styles.menuList}>
+        {menuItems.map((item) => (
+          <li key={item.id} className={styles.menuItem}>
+            <button
+              onClick={() => onNavigate(item.id)}
+              className={activeView === item.id ? styles.selected : ''}
+            >
+              <div className={styles.menuContent}>
+                <span className={styles.menuIcon}>{item.icon}</span>
+                <span className={styles.menuText}>{item.label}</span>
+              </div>
+            </button>
+          </li>
+        ))}
+        <li key='logout' className={styles.menuItem}>
+          <button onClick={logout} className={styles.logoutButton}>
+            <span className={styles.menuIcon}><LuLogOut /></span>
+            <span className={styles.menuText}>Logout</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  );
+}
