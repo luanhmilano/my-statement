@@ -1,7 +1,8 @@
 import styles from '../../styles/header.module.css';
-import { LuCircleUser, LuSettings, LuBell, LuSearch } from "react-icons/lu";
+import { LuCircleUser, LuSettings, LuBell, LuSearch, LuMenu } from "react-icons/lu";
+import type { HeaderProps } from '../../types';
 
-export default function Header() {
+export default function Header({ onToggleMenu, isMobile = false }: HeaderProps) {
   return (
     <div className={styles.container}>
       <div className={styles.searchContainer}>
@@ -15,19 +16,25 @@ export default function Header() {
         </div>
       </div>
       
-      <div className={styles.iconContainer}>
-        <button className={styles.iconButton}>
-          <span className={styles.icon}><LuSettings /></span>
+      {isMobile ? (
+        <button className={styles.menuButton} onClick={onToggleMenu}>
+          <LuMenu className={styles.menuIcon} />
         </button>
-        
-        <button className={styles.iconButton}>
-          <span className={styles.icon}><LuBell /></span>
-        </button>
-        
-        <button className={styles.iconButton}>
-          <span className={styles.icon}><LuCircleUser /></span>
-        </button>
-      </div>
+      ) : (
+        <div className={styles.iconContainer}>
+          <button className={styles.iconButton}>
+            <span className={styles.icon}><LuSettings /></span>
+          </button>
+          
+          <button className={styles.iconButton}>
+            <span className={styles.icon}><LuBell /></span>
+          </button>
+          
+          <button className={styles.iconButton}>
+            <span className={styles.icon}><LuCircleUser /></span>
+          </button>
+        </div>
+      )}
     </div>
   );
 }

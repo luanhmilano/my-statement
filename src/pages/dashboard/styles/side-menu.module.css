@@ -52,6 +52,7 @@
 .menuItem button.selected .menuText,
 .menuItem button.selected .menuIcon {
   color: #8b5cf6;
+  font-weight: 600;
 }
 
 .menuContent {
@@ -64,27 +65,18 @@
   font-size: 1.1rem;
   min-width: 20px;
   text-align: center;
+  transition: color 0.2s ease;
 }
 
 .menuText {
   flex: 1;
-}
-
-.menuArrow {
-  font-size: 0.8rem;
-  color: inherit;
-  transition: transform 0.2s ease;
-}
-
-.logoutSection {
-  padding: 1rem;
-  border-top: 1px solid #e0e0e0;
-  margin-top: auto;
+  transition: color 0.2s ease;
 }
 
 .logoutButton {
   background: none;
   border: none;
+  color: #dc2626;
   font-size: 1rem;
   cursor: pointer;
   width: 100%;
@@ -95,4 +87,56 @@
   align-items: center;
   gap: 0.75rem;
   transition: background-color 0.2s ease;
+}
+
+.logoutButton:hover {
+  background-color: #fee2e2;
+}
+
+/* Mobile styles */
+.mobileContainer {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100vh;
+  z-index: 1000;
+  transition: left 0.3s ease;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.mobileContainer.open {
+  left: 0;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  z-index: 1001;
+}
+
+.closeButton:hover {
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .container:not(.mobileContainer) {
+    display: none;
+  }
 }

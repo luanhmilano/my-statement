@@ -6,7 +6,14 @@ import HomeView from './home.view';
 import StatementView from './statement.view';
 import ProfileView from './profile.view';
 
-export default function DashboardView({ logout, activeView, onNavigate }: DashboardProps) {
+export default function DashboardView({ 
+  logout, 
+  activeView, 
+  onNavigate,
+  isMobile,
+  isMobileMenuOpen,
+  onToggleMobileMenu
+}: DashboardProps) {
   const renderActiveView = () => {
     switch (activeView) {
       case 'home':
@@ -22,16 +29,32 @@ export default function DashboardView({ logout, activeView, onNavigate }: Dashbo
   
   return (
     <div className={styles.container}>
-      <div className={styles.sideMenu}>
+      {!isMobile && (
+        <div className={styles.sideMenu}>
+          <SideMenu 
+            logout={logout} 
+            activeView={activeView}
+            onNavigate={onNavigate}
+          />
+        </div>
+      )}
+      
+      {isMobile && (
         <SideMenu 
           logout={logout} 
           activeView={activeView}
           onNavigate={onNavigate}
+          isMobile={isMobile}
+          isOpen={isMobileMenuOpen}
+          onClose={onToggleMobileMenu}
         />
-      </div>
+      )}
       
       <div className={styles.mainContent}>
-        <Header />
+        <Header 
+          onToggleMenu={onToggleMobileMenu}
+          isMobile={isMobile}
+        />
         <main className={styles.main}>
           {renderActiveView()}
         </main>
