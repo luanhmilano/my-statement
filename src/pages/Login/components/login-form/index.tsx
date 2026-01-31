@@ -13,7 +13,7 @@ export default function LoginForm({
   navigate,
 }: LoginFormProps) {
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form data-testid="login-form" className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <h1 className={styles.title}>Log in</h1>
       <p className={styles.subtitle}>
         Welcome to My Statement, please fill in the fields below to log into
@@ -50,13 +50,14 @@ export default function LoginForm({
         </span>
       </div>
 
-      <button type="submit" className={styles.button} disabled={isLoading}>
+      <button data-testid="login-submit-button" type="submit" className={styles.button} disabled={isLoading}>
         {isLoading ? <Spinner /> : 'Log in'}
       </button>
       <p>
         <strong>or</strong>
       </p>
       <button
+        data-testid="navigate-register-button"
         type="button"
         className={styles.buttonSecondary}
         onClick={() => navigate(RoutesUrls.REGISTER)}

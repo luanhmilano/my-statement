@@ -12,7 +12,7 @@ export default function RegisterView({
   errors,
 }: RegisterFormProps) {
   return (
-    <div className={styles.container}>
+    <div data-testid="register-view" className={styles.container}>
       <div className={styles.leftSide}>
         <img src={logo} alt="Logo" className={styles.logo} />
         <img src={mainImage} alt="Main" className={styles.mainImage} />
