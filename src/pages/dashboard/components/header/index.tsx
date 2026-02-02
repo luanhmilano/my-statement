@@ -6,7 +6,11 @@ export default function Header({ onToggleMenu, isMobile = false }: HeaderProps) 
   return (
     <div className={styles.container}>
       {isMobile && (
-        <button className={styles.menuButton} onClick={onToggleMenu}>
+        <button
+          className={styles.menuButton}
+          onClick={onToggleMenu}
+          aria-label="Open menu"
+        >
           <LuMenu className={styles.menuIcon} />
         </button>
       )}
@@ -24,15 +28,15 @@ export default function Header({ onToggleMenu, isMobile = false }: HeaderProps) 
       
       {!isMobile && (
         <div className={styles.iconContainer}>
-          <button className={styles.iconButton}>
+          <button className={styles.iconButton} aria-label="Open settings">
             <span className={styles.icon}><LuSettings /></span>
           </button>
           
-          <button className={styles.iconButton}>
+          <button className={styles.iconButton} aria-label="Open notifications">
             <span className={styles.icon}><LuBell /></span>
           </button>
           
-          <button className={styles.iconButton}>
+          <button className={styles.iconButton} aria-label="Open user menu" >
             <span className={styles.icon}><LuCircleUser /></span>
           </button>
         </div>

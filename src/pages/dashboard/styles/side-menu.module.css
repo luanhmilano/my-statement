@@ -100,7 +100,7 @@
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.mobileContainer.open {
+.mobileContainer .open {
   left: 0;
 }
 

@@ -21,7 +21,7 @@ export default function SideMenu({ logout, activeView, onNavigate, isMobile, isO
       {isMobile && isOpen && <div className={styles.overlay} onClick={onClose} />}
       <div className={containerClass}>
         {isMobile && (
-          <button className={styles.closeButton} onClick={onClose}>
+          <button className={styles.closeButton} onClick={onClose} aria-label='Close menu'>
             <LuX />
           </button>
         )}
@@ -30,12 +30,12 @@ export default function SideMenu({ logout, activeView, onNavigate, isMobile, isO
           <img src={logo} width={200} alt="My Statement Logo" />
         </div>
         
-        <ul className={styles.menuList}>
+        <ul className={styles.menuList} aria-label="Main menu">
           {menuItems.map((item) => (
             <li key={item.id} className={styles.menuItem}>
               <button
                 onClick={() => onNavigate(item.id)}
-                className={activeView === item.id ? styles.selected : ''}
+                className={activeView === item.id ? 'selected': ''}
               >
                 <div className={styles.menuContent}>
                   <span className={styles.menuIcon}>{item.icon}</span>
@@ -45,7 +45,7 @@ export default function SideMenu({ logout, activeView, onNavigate, isMobile, isO
             </li>
           ))}
           <li className={styles.menuItem}>
-            <button onClick={logout} className={styles.logoutButton}>
+            <button onClick={logout} className={styles.logoutButton} aria-label="Logout">
               <span className={styles.menuIcon}><LuLogOut /></span>
               <span className={styles.menuText}>Logout</span>
             </button>
