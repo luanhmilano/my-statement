@@ -27,7 +27,7 @@ export default function SideMenu({ logout, activeView, onNavigate, isMobile, isO
         )}
         
         <div className={styles.logo}>
-          <img src={logo} width={200} alt="My Statement Logo" />
+          <img src={logo} width={150} alt="My Statement Logo" />
         </div>
         
         <ul className={styles.menuList} aria-label="Main menu">

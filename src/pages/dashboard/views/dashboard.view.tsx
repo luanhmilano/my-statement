@@ -29,26 +29,14 @@ export default function DashboardView({
   
   return (
     <div className={styles.container}>
-      {!isMobile && (
-        <div className={styles.sideMenu}>
-          <SideMenu 
-            logout={logout} 
-            activeView={activeView}
-            onNavigate={onNavigate}
-          />
-        </div>
-      )}
-      
-      {isMobile && (
-        <SideMenu 
-          logout={logout} 
-          activeView={activeView}
-          onNavigate={onNavigate}
-          isMobile={isMobile}
-          isOpen={isMobileMenuOpen}
-          onClose={onToggleMobileMenu}
-        />
-      )}
+      <SideMenu 
+        logout={logout} 
+        activeView={activeView}
+        onNavigate={onNavigate}
+        isMobile={isMobile}
+        isOpen={!isMobile || isMobileMenuOpen}
+        onClose={onToggleMobileMenu}
+      />
       
       <div className={styles.mainContent}>
         <Header 
