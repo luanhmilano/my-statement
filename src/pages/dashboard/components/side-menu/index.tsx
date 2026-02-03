@@ -18,7 +18,7 @@ export default function SideMenu({ logout, activeView, onNavigate, isMobile, isO
 
   return (
     <>
-      {isMobile && isOpen && <div className={styles.overlay} onClick={onClose} />}
+      {isMobile && isOpen && <div data-testid="mobile-overlay" className={styles.overlay} onClick={onClose} />}
       <div className={containerClass}>
         {isMobile && (
           <button className={styles.closeButton} onClick={onClose} aria-label='Close menu'>
