@@ -1,0 +1,255 @@
+.tableContainer {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  margin-top: 24px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.table thead {
+  background: #f8fafc;
+}
+
+.table th {
+  padding: 16px 20px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.table td {
+  padding: 16px 20px;
+  font-size: 14px;
+  color: #6b7280;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Estilos para valores positivos e negativos */
+.positive {
+  color: #059669;
+  font-weight: 600;
+}
+
+.negative {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.negative::before {
+  content: '-';
+}
+
+.positive::before {
+  content: '+';
+}
+
+/* Botão de download */
+.downloadButton {
+  background: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.downloadButton:hover {
+  background: #4f46e5;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
+}
+
+.downloadButton:active {
+  transform: translateY(0);
+}
+
+/* Paginação */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background: #f8fafc;
+}
+
+.pagination button {
+  background: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #4f46e5;
+  transform: translateY(-1px);
+}
+
+.pagination button:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.pagination span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .table th,
+  .table td {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+  
+  .downloadButton {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tableContainer {
+    margin: 16px;
+    border-radius: 8px;
+  }
+  
+  .table th,
+  .table td {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+  
+  .table th:nth-child(1), /* Transaction ID */
+  .table td:nth-child(1) {
+    display: none;
+  }
+  
+  .table th:nth-child(4), /* Card */
+  .table td:nth-child(4) {
+    display: none;
+  }
+  
+  .downloadButton {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+  
+  .pagination {
+    padding: 16px;
+    gap: 12px;
+  }
+  
+  .pagination button {
+    padding: 6px 12px;
+    font-size: 12px;
+    min-width: 60px;
+  }
+  
+  .pagination span {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tableContainer {
+    margin: 12px;
+    overflow-x: auto;
+  }
+  
+  .table {
+    min-width: 500px;
+  }
+  
+  .table th,
+  .table td {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+  
+  .pagination {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .pagination > div {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+}
+
+/* Estados de loading e empty */
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.empty {
+  text-align: center;
+  padding: 40px;
+  color: #9ca3af;
+  font-size: 16px;
+}
+
+.empty::before {
+  content: '📋';
+  display: block;
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+/* Animações suaves */
+.table tbody tr {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

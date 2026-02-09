@@ -22,9 +22,14 @@ describe('LoginForm Component', () => {
   const mockProps = {
     onSubmit: vi.fn().mockResolvedValue(undefined),
     isLoading: false,
-    register: vi.fn((name) => ({ name, onChange: vi.fn(), onBlur: vi.fn(), ref: vi.fn() })),
+    register: vi.fn(name => ({
+      name,
+      onChange: vi.fn(),
+      onBlur: vi.fn(),
+      ref: vi.fn(),
+    })),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    handleSubmit: vi.fn((callback) => async (e: any) => {
+    handleSubmit: vi.fn(callback => async (e: any) => {
       e.preventDefault();
       await callback();
     }),
@@ -44,19 +49,27 @@ describe('LoginForm Component', () => {
     render(<LoginForm {...mockProps} />);
 
     expect(screen.getByRole('heading', { name: 'Log in' })).toBeInTheDocument();
-    expect(screen.getByText('Welcome to My Statement, please fill in the fields below to log into your account.')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Welcome to My Statement, please fill in the fields below to log into your account.'
+      )
+    ).toBeInTheDocument();
     expect(screen.getByText('E-mail')).toBeInTheDocument();
     expect(screen.getByText('Password')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('E-mail')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Enter your password')).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText('Enter your password')
+    ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Log in' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Create account' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Create account' })
+    ).toBeInTheDocument();
     expect(screen.getByText('or')).toBeInTheDocument();
   });
 
   it('should call handleSubmit and onSubmit when form is submitted', async () => {
     const { container } = render(<LoginForm {...mockProps} />);
-    
+
     const form = container.querySelector('form');
     fireEvent.submit(form!);
 
@@ -67,7 +80,9 @@ describe('LoginForm Component', () => {
     render(<LoginForm {...mockProps} isLoading={true} />);
 
     expect(screen.getByTestId('spinner')).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: 'Log in' })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: 'Log in' })
+    ).not.toBeInTheDocument();
   });
 
   it('should disable submit button when loading', () => {
@@ -91,7 +106,9 @@ describe('LoginForm Component', () => {
   it('should display password error when present', () => {
     const propsWithPasswordError = {
       ...mockProps,
-      errors: { password: { message: 'Password is required', type: 'required' } },
+      errors: {
+        password: { message: 'Password is required', type: 'required' },
+      },
     };
 
     render(<LoginForm {...propsWithPasswordError} />);
@@ -102,7 +119,9 @@ describe('LoginForm Component', () => {
   it('should call navigate with register route when create account button is clicked', () => {
     render(<LoginForm {...mockProps} />);
 
-    const createAccountButton = screen.getByRole('button', { name: 'Create account' });
+    const createAccountButton = screen.getByRole('button', {
+      name: 'Create account',
+    });
     fireEvent.click(createAccountButton);
 
     expect(mockProps.navigate).toHaveBeenCalledWith(RoutesUrls.REGISTER);

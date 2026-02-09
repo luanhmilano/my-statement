@@ -1,0 +1,103 @@
+.balanceTop {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 200px;
+  transition: all 0.2s ease;
+}
+
+.balanceTop:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.balanceTop svg {
+  width: 24px;
+  height: 24px;
+  color: #6366f1;
+}
+
+.balanceTitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.balanceAmount {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+  text-align: center;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .balanceTop {
+    padding: 20px 16px;
+    min-width: 160px;
+  }
+  
+  .balanceAmount {
+    font-size: 24px;
+  }
+  
+  .balanceTitle {
+    font-size: 13px;
+  }
+  
+  .balanceTop svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .balanceTop {
+    padding: 16px 12px;
+    min-width: 140px;
+  }
+  
+  .balanceAmount {
+    font-size: 20px;
+  }
+  
+  .balanceTitle {
+    font-size: 12px;
+  }
+}
+
+/* Variações de cor para diferentes tipos de balance */
+.balanceTop[data-type="money"] svg {
+  color: #059669;
+}
+
+.balanceTop[data-type="expenses"] svg {
+  color: #dc2626;
+}
+
+.balanceTop[data-type="earnings"] svg {
+  color: #2563eb;
+}
+
+.balanceTop[data-type="money"] .balanceAmount {
+  color: #059669;
+}
+
+.balanceTop[data-type="expenses"] .balanceAmount {
+  color: #dc2626;
+}
+
+.balanceTop[data-type="earnings"] .balanceAmount {
+  color: #2563eb;
+}

@@ -5,7 +5,7 @@ import { useAuth } from '@/auth/hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { authUser } from '@/services/api';
+import { authUser } from '@/services/auth.api';
 import { RoutesUrls } from '@/utils/enums/routes-url';
 import LoginView from '@/pages/login/view/login.view';
 import LoginController from '@/pages/login/index.page';
@@ -30,7 +30,7 @@ describe('LoginController', () => {
   const mockLoginView = LoginView as Mock;
   const mockIsAxiosError = axios.isAxiosError as unknown as Mock;
 
-  const loginFn = vi.fn(); 
+  const loginFn = vi.fn();
   const navigateFn = vi.fn();
 
   beforeEach(() => {
@@ -55,7 +55,7 @@ describe('LoginController', () => {
     render(<LoginController />);
 
     expect(mockLoginView).toHaveBeenCalledTimes(1);
-    
+
     const props = mockLoginView.mock.calls[0][0];
 
     expect(props).toHaveProperty('onSubmit');
@@ -83,16 +83,16 @@ describe('LoginController', () => {
       userid: 'user@example.com',
       password: 'password123',
     });
-    
+
     expect(loginFn).toHaveBeenCalledWith(mockToken);
-    
+
     expect(toast.success).toHaveBeenCalledWith('Login successfully!');
     expect(navigateFn).toHaveBeenCalledWith(RoutesUrls.DASHBOARD);
   });
 
   it('should set isLoading correctly during and after request', async () => {
     let resolveApi: (value: unknown) => void;
-    const apiPromise = new Promise((resolve) => {
+    const apiPromise = new Promise(resolve => {
       resolveApi = resolve;
     });
     mockAuthUser.mockReturnValue(apiPromise);
@@ -130,16 +130,23 @@ describe('LoginController', () => {
     mockAuthUser.mockRejectedValueOnce(errorResponse);
     mockIsAxiosError.mockReturnValue(true);
 
-    const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const consoleWarnSpy = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {});
 
     render(<LoginController />);
 
     const { onSubmit } = mockLoginView.mock.calls[0][0];
     await onSubmit({} as LoginData);
 
-    expect(consoleWarnSpy).toHaveBeenCalledWith('Validation error from API:', 'Invalid format');
-    expect(toast.error).toHaveBeenCalledWith('Validation error. Check the data.');
-    
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
+      'Validation error from API:',
+      'Invalid format'
+    );
+    expect(toast.error).toHaveBeenCalledWith(
+      'Validation error. Check the data.'
+    );
+
     expect(loginFn).not.toHaveBeenCalled();
     expect(navigateFn).not.toHaveBeenCalled();
   });
@@ -150,14 +157,19 @@ describe('LoginController', () => {
     mockAuthUser.mockRejectedValueOnce(genericError);
     mockIsAxiosError.mockReturnValue(false);
 
-    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const consoleErrorSpy = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
 
     render(<LoginController />);
 
     const { onSubmit } = mockLoginView.mock.calls[0][0];
     await onSubmit({} as LoginData);
 
-    expect(consoleErrorSpy).toHaveBeenCalledWith('Unexpected error:', genericError);
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      'Unexpected error:',
+      genericError
+    );
     expect(toast.error).toHaveBeenCalledWith('Invalid credentials.');
   });
 });

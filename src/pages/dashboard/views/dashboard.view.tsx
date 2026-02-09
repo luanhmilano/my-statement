@@ -3,49 +3,44 @@ import Header from '../components/header';
 import SideMenu from '../components/side-menu';
 import styles from '../styles/dashboard.module.css';
 import HomeView from './home.view';
-import StatementView from './statement.view';
 import ProfileView from './profile.view';
+import StatementController from '../controllers/statement.controller';
 
-export default function DashboardView({ 
-  logout, 
-  activeView, 
+export default function DashboardView({
+  logout,
+  activeView,
   onNavigate,
   isMobile,
   isMobileMenuOpen,
-  onToggleMobileMenu
+  onToggleMobileMenu,
 }: DashboardProps) {
   const renderActiveView = () => {
     switch (activeView) {
       case 'home':
         return <HomeView />;
       case 'statement':
-        return <StatementView />;
+        return <StatementController />;
       case 'profile':
         return <ProfileView />;
       default:
         return <HomeView />;
     }
   };
-  
+
   return (
     <div className={styles.container}>
-      <SideMenu 
-        logout={logout} 
+      <SideMenu
+        logout={logout}
         activeView={activeView}
         onNavigate={onNavigate}
         isMobile={isMobile}
         isOpen={!isMobile || isMobileMenuOpen}
         onClose={onToggleMobileMenu}
       />
-      
+
       <div className={styles.mainContent}>
-        <Header 
-          onToggleMenu={onToggleMobileMenu}
-          isMobile={isMobile}
-        />
-        <main className={styles.main}>
-          {renderActiveView()}
-        </main>
+        <Header onToggleMenu={onToggleMobileMenu} isMobile={isMobile} />
+        <main className={styles.main}>{renderActiveView()}</main>
       </div>
     </div>
   );

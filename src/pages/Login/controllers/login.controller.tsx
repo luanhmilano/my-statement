@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { authUser } from '@/services/api';
+import { authUser } from '@/services/auth.api';
 import { RoutesUrls } from '@/utils/enums/routes-url';
 import { loginSchema, type LoginData } from '../utils/login-schema';
 

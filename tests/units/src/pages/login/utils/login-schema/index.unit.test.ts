@@ -10,7 +10,7 @@ describe('Login Schema Validation', () => {
 
   it('should validate correct data successfully', () => {
     const result = loginSchema.safeParse(validData);
-    
+
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data).toEqual(validData);
@@ -166,7 +166,8 @@ describe('Login Schema Validation', () => {
   });
 
   it('should accept long passwords', () => {
-    const longPassword = 'verylongpasswordwithmanycharsandspecialsymbols123!@#$%^&*()';
+    const longPassword =
+      'verylongpasswordwithmanycharsandspecialsymbols123!@#$%^&*()';
     const testData = { ...validData, password: longPassword };
     const result = loginSchema.safeParse(testData);
 
@@ -222,7 +223,10 @@ describe('Login Schema Validation', () => {
 
   it('should handle null and undefined values', () => {
     const nullEmailData = { email: null, password: 'password123' };
-    const undefinedPasswordData = { email: 'test@example.com', password: undefined };
+    const undefinedPasswordData = {
+      email: 'test@example.com',
+      password: undefined,
+    };
 
     const nullResult = loginSchema.safeParse(nullEmailData);
     const undefinedResult = loginSchema.safeParse(undefinedPasswordData);
@@ -238,7 +242,9 @@ describe('Login Schema Validation', () => {
     expect(result.success).toBe(false);
     if (!result.success) {
       expect(result.error.issues).toHaveLength(2);
-      expect(result.error.issues.every(issue => issue.code === 'invalid_type')).toBe(true);
+      expect(
+        result.error.issues.every(issue => issue.code === 'invalid_type')
+      ).toBe(true);
     }
   });
 
