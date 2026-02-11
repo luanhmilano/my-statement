@@ -6,7 +6,7 @@ export function processStatementData(rawData: any[]): StatementItem[] {
     id: item.id || Math.random().toString(36),
     description: item.description || 'No description',
     type: item.type || 'Uncategorized',
-    date: new Date(item.date).toLocaleDateString(),
+    date: new Date(item.created_at).toLocaleDateString(),
     amount: parseFloat(item.amount) || 0,
     card: '**** 1234',
   }));

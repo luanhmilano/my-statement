@@ -1,38 +1,51 @@
 .tableContainer {
   background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  box-shadow: 0px 10px 60px rgba(226, 236, 249, 0.5);
+  border: none;
   overflow: hidden;
-  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.tableWrapper {
+  flex: 1;
+  overflow: auto;
+  width: 100%;
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .table thead {
-  background: #f8fafc;
+  background: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .table th {
-  padding: 16px 20px;
+  padding: 24px 20px;
   text-align: left;
-  font-weight: 600;
-  font-size: 14px;
-  color: #374151;
-  border-bottom: 1px solid #e5e7eb;
-  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 15px;
+  color: #6816D6;
+  border-bottom: 1px solid #E3D1FA;
   letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 .table td {
-  padding: 16px 20px;
-  font-size: 14px;
-  color: #6b7280;
-  border-bottom: 1px solid #f3f4f6;
+  padding: 20px 20px;
+  font-size: 15px;
+  color: #232323;
+  border-bottom: 1px solid #E6EFF5;
+  vertical-align: middle;
+  white-space: nowrap;
 }
 
 .table tbody tr {
@@ -49,56 +62,72 @@
 
 /* Estilos para valores positivos e negativos */
 .positive {
-  color: #059669;
-  font-weight: 600;
+  color: #41D4A8;
+  font-weight: 500;
 }
 
 .negative {
   color: #dc2626;
-  font-weight: 600;
-}
-
-.negative::before {
-  content: '-';
-}
-
-.positive::before {
-  content: '+';
+  font-weight: 500;
 }
 
 /* Botão de download */
 .downloadButton {
-  background: #6366f1;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 16px;
-  font-size: 12px;
+  background: transparent;
+  color: #123288; 
+  border: 1px solid #123288;
+  border-radius: 5px;
+  padding: 8px 20px;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .downloadButton:hover {
-  background: #4f46e5;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
+  background: #123288;
+  color: #ffffff;
 }
 
 .downloadButton:active {
   transform: translateY(0);
 }
 
+.descriptionCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Container da paginação fixo na parte inferior */
+.paginationContainer {
+  background: #f8fafc;
+  border-top: 1px solid #e5e7eb;
+  padding: 16px 20px;
+  flex-shrink: 0;
+  z-index: 20;
+}
+
 /* Paginação */
 .pagination {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 20px;
-  padding: 20px;
-  background: #f8fafc;
+}
+
+.paginationInfo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .pagination button {
@@ -112,6 +141,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   min-width: 80px;
+  white-space: nowrap;
 }
 
 .pagination button:hover:not(:disabled) {
@@ -121,18 +151,71 @@
 
 .pagination button:disabled {
   background: #d1d5db;
+  color: #9ca3af;
   cursor: not-allowed;
   transform: none;
 }
 
-.pagination span {
+.pageNumbers {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pageNumber {
+  background: transparent;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 6px 12px;
   font-size: 14px;
-  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 40px;
+}
+
+.pageNumber:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.pageNumber.active {
+  background: #6366f1;
+  color: white;
+  border-color: #6366f1;
+}
+
+/* Estilos para o tfoot */
+.table tfoot {
+  background: #f8fafc;
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  border-top: 2px solid #e5e7eb;
+}
+
+.table tfoot th,
+.table tfoot td {
+  padding: 16px 20px;
+  font-weight: 600;
+  font-size: 14px;
   color: #374151;
+  border-bottom: none;
+  border-top: 1px solid #e5e7eb;
 }
 
 /* Responsive design */
 @media (max-width: 1024px) {
+  .tableContainer {
+    max-height: 90vh;
+    min-height: 450px;
+  }
+  
+  .tableWrapper {
+    max-height: calc(90vh - 70px);
+    min-height: 320px;
+  }
+  
   .table th,
   .table td {
     padding: 12px 16px;
@@ -147,8 +230,12 @@
 
 @media (max-width: 768px) {
   .tableContainer {
-    margin: 16px;
-    border-radius: 8px;
+    max-height: 95vh;
+    min-height: 400px;
+  }
+  
+  .table {
+    min-width: 700px;
   }
   
   .table th,
@@ -157,24 +244,44 @@
     font-size: 12px;
   }
   
-  .table th:nth-child(1), /* Transaction ID */
-  .table td:nth-child(1) {
-    display: none;
+  .paginationContainer {
+    padding: 12px 16px;
   }
   
-  .table th:nth-child(4), /* Card */
-  .table td:nth-child(4) {
-    display: none;
+  .pagination {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .paginationInfo {
+    order: 2;
+    justify-content: center;
+  }
+  
+  .paginationControls {
+    order: 1;
+    justify-content: center;
+    width: 100%;
   }
   
   .downloadButton {
     padding: 4px 8px;
     font-size: 10px;
   }
+}
+
+@media (max-width: 480px) {
+  .tableContainer {
+    max-height: 98vh;
+    min-height: 350px;
+  }
   
-  .pagination {
-    padding: 16px;
-    gap: 12px;
+  .table {
+    min-width: 600px;
+  }
+  
+  .paginationControls {
+    gap: 8px;
   }
   
   .pagination button {
@@ -183,50 +290,33 @@
     min-width: 60px;
   }
   
-  .pagination span {
+  .pageNumber {
+    padding: 4px 8px;
     font-size: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .tableContainer {
-    margin: 12px;
-    overflow-x: auto;
+    min-width: 32px;
   }
   
-  .table {
-    min-width: 500px;
-  }
-  
-  .table th,
-  .table td {
-    padding: 8px 10px;
-    font-size: 11px;
-  }
-  
-  .pagination {
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .pagination > div {
-    display: flex;
-    gap: 12px;
-    align-items: center;
+  .pageNumbers {
+    gap: 4px;
   }
 }
 
 /* Estados de loading e empty */
 .loading {
-  text-align: center;
-  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
   color: #6b7280;
   font-size: 16px;
 }
 
 .empty {
-  text-align: center;
-  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
   color: #9ca3af;
   font-size: 16px;
 }
@@ -252,4 +342,24 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Scrollbar personalizada */
+.tableWrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.tableWrapper::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }

@@ -52,7 +52,7 @@ export default function SideMenu({
         )}
 
         <div className={styles.logo}>
-          <img src={logo} width={150} alt="My Statement Logo" />
+          <img src={logo} width={212} height={63} alt="My Statement Logo" />
         </div>
 
         <ul className={styles.menuList} aria-label="Main menu">

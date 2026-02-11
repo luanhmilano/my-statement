@@ -3,19 +3,38 @@
   flex-direction: column;
   height: 100vh;
   width: 100%;
-  padding: 24px;
-  background: #f8fafc;
-  gap: 24px;
+  padding-top: 20px;
+  gap: 20px;
   overflow: hidden;
 }
 
 .balanceTopHeader {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   gap: 24px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-bottom: 8px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* Área da tabela - permitir scroll e ocupar espaço restante */
+.tableWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.contentArea {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Estados de loading e erro */
@@ -79,47 +98,76 @@
 /* Responsive design */
 @media (max-width: 1200px) {
   .container {
-    padding: 20px;
-    gap: 20px;
+    padding: 16px;
+    gap: 16px;
   }
   
   .balanceTopHeader {
-    gap: 20px;
+    gap: 16px;
+    min-height: 100px;
+    max-height: 100px;
+  }
+}
+
+@media (max-width: 992px) {
+  .balanceTopHeader {
+    gap: 12px;
+    min-height: 90px;
+    max-height: 90px;
   }
 }
 
 @media (max-width: 768px) {
-  .container {
-    padding: 16px;
-    gap: 16px;
-    height: calc(100vh - 60px); /* Ajustar se houver header/navbar */
-  }
-  
-  .balanceTopHeader {
-    flex-direction: column;
-    gap: 16px;
-    align-items: stretch;
-  }
-  
-  .balanceTopHeader > div {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 480px) {
   .container {
     padding: 12px;
     gap: 12px;
   }
   
   .balanceTopHeader {
-    gap: 12px;
+    gap: 8px;
+    min-height: 90px;
+    max-height: 90px;
   }
   
-  .balanceTopHeader > div {
-    max-width: 100%;
+  .tableWrapper {
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .balanceTopHeader {
+    gap: 6px;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 0 4px;
+    min-height: 80px;
+    max-height: 80px;
+    /* Adicionar scroll suave */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Esconder scrollbar mas manter funcionalidade */
+  .balanceTopHeader::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .balanceTopHeader {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 8px;
+    gap: 8px;
+  }
+  
+  .balanceTopHeader {
+    min-height: 80px;
+    max-height: 80px;
+    gap: 4px;
   }
   
   .errorContainer {
@@ -132,12 +180,6 @@
   }
 }
 
-/* Para garantir que a tabela ocupe o espaço restante */
-.container > div:last-of-type:not(.balanceTopHeader):not(.errorContainer) {
-  flex: 1;
-  overflow: hidden;
-}
-
 /* Animações */
 .container {
   animation: fadeIn 0.5s ease-in-out;
@@ -147,7 +189,7 @@
   animation: slideInDown 0.6s ease-out;
 }
 
-.container > div:not(.balanceTopHeader) {
+.tableWrapper {
   animation: slideInUp 0.6s ease-out 0.2s both;
 }
 
@@ -180,18 +222,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* Ajustes para melhor integração com outros componentes */
-.container .tableContainer {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.container .tableContainer .table {
-  flex: 1;
 }
 
 /* Estados especiais */

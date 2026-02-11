@@ -6,7 +6,7 @@ const { API_URL } = getConfig();
 
 export const fetchStatement = async (token: string) => {
   try {
-    const response = await axios.get(`${API_URL}/statements`, {
+    const response = await axios.get(`${API_URL}/statements/?limit=50`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -22,7 +22,7 @@ export const fetchStatement = async (token: string) => {
 
 export const fetchBalance = async (token: string): Promise<number> => {
   try {
-    const response = await axios.get(`${API_URL}/balance`, {
+    const response = await axios.get(`${API_URL}/balance/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

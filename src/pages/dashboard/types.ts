@@ -31,7 +31,7 @@ export interface HeaderProps {
 export interface BalanceTopProps {
   icon?: React.ComponentType;
   title: string;
-  amount: number;
+  amount: string | number;
   type: 'money' | 'expenses' | 'earnings' | 'default';
 }
 
@@ -48,8 +48,8 @@ export interface StatementViewProps {
   data: StatementItem[];
   balanceTotal: {
     balance: number;
-    expenses: number;
-    earnings: number;
+    expenses: string;
+    earnings: string;
   };
   loading: boolean;
   error: string | null;

@@ -1,13 +1,14 @@
 .container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
   background-color: #ffffff;
   border-bottom: 1px solid #e0e0e0;
-  height: 100px;
+  width: 100%;
+  height: 120px;
   border-radius: 1rem;
-  gap: 1rem;
+  gap: 41px;
+  padding: 32px 48px;
 }
 
 .menuButton {
@@ -35,7 +36,6 @@
 
 .searchContainer {
   flex: 1;
-  max-width: 600px;
 }
 
 .searchInputWrapper {
@@ -61,7 +61,7 @@
   font-size: 1rem;
   outline: none;
   transition: border-color 0.2s ease;
-  height: 44px;
+  height: 56px;
 }
 
 .searchInput:focus {
@@ -75,7 +75,7 @@
 
 .iconContainer {
   display: flex;
-  gap: 0.75rem;
+  gap: 41px;
   align-items: center;
   flex-shrink: 0;
 }
@@ -84,13 +84,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border: none;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #d0d0d0;
   border-radius: 8px;
   background-color: transparent;
   cursor: pointer;
   transition: background-color 0.2s ease;
+}
+
+.iconButton:last-child {
+  border: none;
 }
 
 .iconButton:hover {

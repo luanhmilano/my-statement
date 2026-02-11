@@ -33,13 +33,7 @@ export default function StatementView({
           type='earnings'
         />
       </div>
-      <PaginatedTable
-        data={data}
-        currentPage={1}
-        totalPages={1}
-        onPageChange={() => {}}
-      />
-      {loading && <p>Loading...</p>}
+
       {error && (
         <div className={styles.errorContainer}>
           <p className={styles.errorMessage}>{error}</p>
@@ -48,6 +42,13 @@ export default function StatementView({
           </button>
         </div>
       )}
+
+      {!loading && !error && (
+        <div className={styles.contentArea}> 
+          <PaginatedTable data={data} />
+        </div>
+      )}
+      {loading && <p>Loading...</p>}
     </div>
   );
 }

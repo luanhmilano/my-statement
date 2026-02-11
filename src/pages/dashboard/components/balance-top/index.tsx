@@ -9,9 +9,11 @@ export default function BalanceTop({
 }: BalanceTopProps & { type?: 'money' | 'expenses' | 'earnings' | 'default' }) {
   return (
     <div className={styles.balanceTop} data-type={type}>
-      {IconComponent && <IconComponent />}
-      <p className={styles.balanceTitle}>{title}</p>
-      <p className={styles.balanceAmount}>${amount}</p>
+      <span className={styles.iconWrapper}>{IconComponent && <IconComponent />}</span>
+      <div className={styles.contentWrapper}>
+        <p className={styles.balanceTitle}>{title}</p>
+        <p className={styles.balanceAmount}>${amount}</p>
+      </div>
     </div>
   );
 }

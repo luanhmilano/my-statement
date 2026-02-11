@@ -1,11 +1,7 @@
 import styles from '../../styles/header.module.css';
-import {
-  LuCircleUser,
-  LuSettings,
-  LuBell,
-  LuSearch,
-  LuMenu,
-} from 'react-icons/lu';
+import Avatar from '@assets/Avatars.png';
+
+import { LuSettings, LuBell, LuSearch } from 'react-icons/lu';
 import type { HeaderProps } from '../../types';
 
 export default function Header({
@@ -20,7 +16,7 @@ export default function Header({
           onClick={onToggleMenu}
           aria-label="Open menu"
         >
-          <LuMenu className={styles.menuIcon} />
+          <img src={Avatar} alt="User Avatar" />
         </button>
       )}
 
@@ -51,7 +47,7 @@ export default function Header({
 
           <button className={styles.iconButton} aria-label="Open user menu">
             <span className={styles.icon}>
-              <LuCircleUser />
+              <img src={Avatar} alt="User Avatar" />
             </span>
           </button>
         </div>
