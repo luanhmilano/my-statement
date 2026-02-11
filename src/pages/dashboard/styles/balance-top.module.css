@@ -1,0 +1,329 @@
+.balanceTop {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  flex: 1;
+  transition: all 0.2s ease;
+  height: 102px; /* Altura fixa para consistência */
+}
+
+.balanceTop:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(99, 102, 241, 0.1);
+  transition: all 0.2s ease;
+}
+
+.balanceTop svg {
+  width: 70px;
+  height: 50px;
+  color: #6366f1;
+  transition: all 0.2s ease;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.balanceTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.balanceAmount {
+  font-size: clamp(20px, 4vw, 28px); /* Tamanho responsivo */
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.2;
+  word-break: break-all;
+}
+
+/* Variações de cor para diferentes tipos de balance */
+.balanceTop[data-type="money"] .iconWrapper {
+  background: #E3D1FA;
+}
+
+.balanceTop[data-type="money"] svg {
+  color: #6816D6;
+}
+
+.balanceTop[data-type="money"] .balanceAmount {
+  color: #6816D6;
+}
+
+.balanceTop[data-type="expenses"] .iconWrapper {
+  background: rgba(220, 38, 38, 0.1);
+}
+
+.balanceTop[data-type="expenses"] svg {
+  color: #dc2626;
+}
+
+.balanceTop[data-type="expenses"] .balanceAmount {
+  color: #dc2626;
+}
+
+.balanceTop[data-type="earnings"] .iconWrapper {
+  background: #CEF7E8;
+}
+
+.balanceTop[data-type="earnings"] svg {
+  color: #0CB97B;
+}
+
+.balanceTop[data-type="earnings"] .balanceAmount {
+  color: #0CB97B;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .balanceTop {
+    min-width: 180px;
+    max-width: 250px;
+    padding: 18px;
+    height: 110px;
+  }
+  
+  .iconWrapper {
+    width: 70px;
+    height: 50px;
+  }
+  
+  .balanceTop svg {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .balanceAmount {
+    font-size: clamp(18px, 3.5vw, 24px);
+  }
+}
+
+@media (max-width: 992px) {
+  .balanceTop {
+    min-width: 160px;
+    max-width: 200px;
+    padding: 16px;
+    height: 100px;
+    gap: 8px;
+  }
+  
+  .iconWrapper {
+    width: 40px;
+    height: 30px;
+  }
+  
+  .balanceTop svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .balanceTitle {
+    font-size: 11px;
+  }
+  
+  .balanceAmount {
+    font-size: clamp(16px, 3vw, 22px);
+  }
+}
+
+@media (max-width: 768px) {
+  .balanceTop {
+    min-width: 140px;
+    max-width: 180px;
+    padding: 14px;
+    height: 90px;
+    gap: 6px;
+  }
+  
+  .iconWrapper {
+    width: 50px;
+    height: 40px;
+  }
+  
+  .balanceTop svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .balanceTitle {
+    font-size: 10px;
+  }
+  
+  .balanceAmount {
+    font-size: clamp(14px, 2.5vw, 20px);
+  }
+}
+
+@media (max-width: 640px) {
+  .balanceTop {
+    min-width: 120px;
+    max-width: 160px;
+    padding: 12px;
+    height: 80px;
+    gap: 4px;
+  }
+  
+  .iconWrapper {
+    width: 40px;
+    height: 32px;
+  }
+  
+  .balanceTop svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .balanceTitle {
+    font-size: 9px;
+  }
+  
+  .balanceAmount {
+    font-size: clamp(12px, 2vw, 18px);
+  }
+}
+
+@media (max-width: 480px) {
+  .balanceTop {
+    min-width: 110px;
+    max-width: 140px;
+    padding: 10px;
+    height: 75px;
+    gap: 4px;
+  }
+  
+  .iconWrapper {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .balanceTop svg {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .balanceTitle {
+    font-size: 8px;
+  }
+  
+  .balanceAmount {
+    font-size: clamp(11px, 1.8vw, 16px);
+  }
+}
+
+/* Estados de hover em diferentes tipos */
+.balanceTop[data-type="money"]:hover .iconWrapper {
+  background: #d8bef9;
+  transform: scale(1.05);
+}
+
+.balanceTop[data-type="expenses"]:hover .iconWrapper {
+  background: rgba(220, 38, 38, 0.2);
+  transform: scale(1.05);
+}
+
+.balanceTop[data-type="earnings"]:hover .iconWrapper {
+  background: #b5f9e0;
+  transform: scale(1.05);
+}
+
+/* Animações */
+.balanceTop {
+  animation: slideInUp 0.4s ease-out;
+}
+
+.balanceTop:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.balanceTop:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.balanceTop:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estados de loading */
+.balanceTop.loading {
+  opacity: 0.6;
+}
+
+.balanceTop.loading .balanceAmount {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Melhorias para números longos */
+.balanceAmount {
+  word-break: keep-all;
+  hyphens: none;
+}
+
+/* Ajuste especial para valores muito grandes */
+.balanceAmount[data-large="true"] {
+  font-size: clamp(12px, 2vw, 20px);
+  line-height: 1.1;
+}
+
+/* Scrollbar personalizada para containers pequenos se necessário */
+.contentWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.contentWrapper {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

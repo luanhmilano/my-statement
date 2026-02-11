@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { createUser } from '@/services/api';
+import { createUser } from '@/services/auth.api';
 import { RoutesUrls } from '@/utils/enums/routes-url';
 import RegisterView from '@/pages/register/view/register.view';
 import RegisterController from '@/pages/register/index.page';
@@ -87,7 +87,7 @@ describe('RegisterController', () => {
 
   it('should set isLoading to true during submission and false after', async () => {
     let resolveApi: (value: unknown) => void;
-    const apiPromise = new Promise((resolve) => {
+    const apiPromise = new Promise(resolve => {
       resolveApi = resolve;
     });
     mockCreateUser.mockReturnValue(apiPromise);
@@ -95,20 +95,20 @@ describe('RegisterController', () => {
     render(<RegisterController />);
 
     const { onSubmit } = mockRegisterView.mock.calls[0][0];
-    const formData = { 
-        email: 'test@test.com', 
-        password: '123', 
-        firstName: 'a', 
-        lastName: 'b',
-        confirmPassword: '123',
-        birthdate: '2000-01-01'
+    const formData = {
+      email: 'test@test.com',
+      password: '123',
+      firstName: 'a',
+      lastName: 'b',
+      confirmPassword: '123',
+      birthdate: '2000-01-01',
     } as RegisterData;
 
     const submitPromise = onSubmit(formData);
 
     await waitFor(() => {
-        const lastCallProps = mockRegisterView.mock.lastCall?.[0];
-        expect(lastCallProps.isLoading).toBe(true);
+      const lastCallProps = mockRegisterView.mock.lastCall?.[0];
+      expect(lastCallProps.isLoading).toBe(true);
     });
 
     // Resolve a API
@@ -117,8 +117,8 @@ describe('RegisterController', () => {
     await submitPromise;
 
     await waitFor(() => {
-        const finalProps = mockRegisterView.mock.lastCall?.[0];
-        expect(finalProps.isLoading).toBe(false);
+      const finalProps = mockRegisterView.mock.lastCall?.[0];
+      expect(finalProps.isLoading).toBe(false);
     });
   });
 
@@ -129,19 +129,26 @@ describe('RegisterController', () => {
         data: { detail: 'Email already exists' },
       },
     };
-    
+
     mockCreateUser.mockRejectedValueOnce(errorResponse);
     mockIsAxiosError.mockReturnValue(true);
 
-    const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const consoleWarnSpy = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {});
 
     render(<RegisterController />);
 
     const { onSubmit } = mockRegisterView.mock.calls[0][0];
     await onSubmit({} as RegisterData);
 
-    expect(consoleWarnSpy).toHaveBeenCalledWith('Validation error from API:', 'Email already exists');
-    expect(toast.error).toHaveBeenCalledWith('Validation error. Please check your data.');
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
+      'Validation error from API:',
+      'Email already exists'
+    );
+    expect(toast.error).toHaveBeenCalledWith(
+      'Validation error. Please check your data.'
+    );
     expect(navigateFn).not.toHaveBeenCalled();
   });
 
@@ -150,14 +157,19 @@ describe('RegisterController', () => {
     mockCreateUser.mockRejectedValueOnce(genericError);
     mockIsAxiosError.mockReturnValue(false);
 
-    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const consoleErrorSpy = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
 
     render(<RegisterController />);
 
     const { onSubmit } = mockRegisterView.mock.calls[0][0];
     await onSubmit({} as RegisterData);
 
-    expect(consoleErrorSpy).toHaveBeenCalledWith('Unexpected error:', genericError);
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      'Unexpected error:',
+      genericError
+    );
     expect(toast.error).toHaveBeenCalledWith('Oops! Something went wrong.');
   });
 });

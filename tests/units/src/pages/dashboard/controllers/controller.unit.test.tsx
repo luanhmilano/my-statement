@@ -5,26 +5,28 @@ import DashboardController from '@/pages/dashboard/index.page';
 const mockLogout = vi.fn();
 vi.mock('@/auth/hooks/useAuth', () => ({
   useAuth: () => ({
-    logout: mockLogout
-  })
+    logout: mockLogout,
+  }),
 }));
 
 const mockDashboardView = vi.fn();
 vi.mock('@/pages/dashboard/views/dashboard.view', () => {
   return {
     __esModule: true,
-    default: vi.fn((props) => {
+    default: vi.fn(props => {
       mockDashboardView(props);
       return (
         <div data-testid="dashboard-view">
-          <button onClick={() => props.onNavigate('statement')}>Navigate to Statement</button>
+          <button onClick={() => props.onNavigate('statement')}>
+            Navigate to Statement
+          </button>
           <button onClick={props.onToggleMobileMenu}>Toggle Mobile Menu</button>
           <div>Active View: {props.activeView}</div>
           <div>Is Mobile: {props.isMobile.toString()}</div>
           <div>Is Mobile Menu Open: {props.isMobileMenuOpen.toString()}</div>
         </div>
       );
-    })
+    }),
   };
 });
 
@@ -68,7 +70,7 @@ describe('DashboardController', () => {
         onNavigate: expect.any(Function),
         isMobile: false,
         isMobileMenuOpen: false,
-        onToggleMobileMenu: expect.any(Function)
+        onToggleMobileMenu: expect.any(Function),
       });
     });
 
@@ -77,7 +79,9 @@ describe('DashboardController', () => {
 
       expect(screen.getByText('Active View: home')).toBeInTheDocument();
       expect(screen.getByText('Is Mobile: false')).toBeInTheDocument();
-      expect(screen.getByText('Is Mobile Menu Open: false')).toBeInTheDocument();
+      expect(
+        screen.getByText('Is Mobile Menu Open: false')
+      ).toBeInTheDocument();
     });
   });
 
@@ -93,7 +97,7 @@ describe('DashboardController', () => {
 
       expect(mockDashboardView).toHaveBeenCalledWith(
         expect.objectContaining({
-          isMobile: true
+          isMobile: true,
         })
       );
     });
@@ -109,7 +113,7 @@ describe('DashboardController', () => {
 
       expect(mockDashboardView).toHaveBeenCalledWith(
         expect.objectContaining({
-          isMobile: false
+          isMobile: false,
         })
       );
     });
@@ -181,7 +185,9 @@ describe('DashboardController', () => {
       fireEvent.click(screen.getByText('Navigate to Statement'));
 
       expect(screen.getByText('Active View: statement')).toBeInTheDocument();
-      expect(screen.getByText('Is Mobile Menu Open: false')).toBeInTheDocument();
+      expect(
+        screen.getByText('Is Mobile Menu Open: false')
+      ).toBeInTheDocument();
     });
 
     it('does not close mobile menu when navigating on desktop', () => {
@@ -213,7 +219,9 @@ describe('DashboardController', () => {
       expect(screen.getByText('Is Mobile Menu Open: true')).toBeInTheDocument();
 
       fireEvent.click(screen.getByText('Toggle Mobile Menu'));
-      expect(screen.getByText('Is Mobile Menu Open: false')).toBeInTheDocument();
+      expect(
+        screen.getByText('Is Mobile Menu Open: false')
+      ).toBeInTheDocument();
     });
 
     it('can toggle mobile menu multiple times', () => {
@@ -223,7 +231,9 @@ describe('DashboardController', () => {
       expect(screen.getByText('Is Mobile Menu Open: true')).toBeInTheDocument();
 
       fireEvent.click(screen.getByText('Toggle Mobile Menu'));
-      expect(screen.getByText('Is Mobile Menu Open: false')).toBeInTheDocument();
+      expect(
+        screen.getByText('Is Mobile Menu Open: false')
+      ).toBeInTheDocument();
 
       fireEvent.click(screen.getByText('Toggle Mobile Menu'));
       expect(screen.getByText('Is Mobile Menu Open: true')).toBeInTheDocument();
@@ -237,7 +247,10 @@ describe('DashboardController', () => {
 
       unmount();
 
-      expect(removeEventListenerSpy).toHaveBeenCalledWith('resize', expect.any(Function));
+      expect(removeEventListenerSpy).toHaveBeenCalledWith(
+        'resize',
+        expect.any(Function)
+      );
     });
 
     it('adds resize event listener on mount', () => {
@@ -245,7 +258,10 @@ describe('DashboardController', () => {
 
       render(<DashboardController />);
 
-      expect(addEventListenerSpy).toHaveBeenCalledWith('resize', expect.any(Function));
+      expect(addEventListenerSpy).toHaveBeenCalledWith(
+        'resize',
+        expect.any(Function)
+      );
     });
   });
 
@@ -255,7 +271,7 @@ describe('DashboardController', () => {
 
       expect(mockDashboardView).toHaveBeenCalledWith(
         expect.objectContaining({
-          logout: mockLogout
+          logout: mockLogout,
         })
       );
     });
@@ -269,7 +285,7 @@ describe('DashboardController', () => {
         onNavigate: expect.any(Function),
         isMobile: expect.any(Boolean),
         isMobileMenuOpen: expect.any(Boolean),
-        onToggleMobileMenu: expect.any(Function)
+        onToggleMobileMenu: expect.any(Function),
       });
     });
 
@@ -279,7 +295,7 @@ describe('DashboardController', () => {
       expect(mockDashboardView).toHaveBeenCalledWith(
         expect.objectContaining({
           activeView: 'home',
-          isMobileMenuOpen: false
+          isMobileMenuOpen: false,
         })
       );
 
@@ -289,7 +305,7 @@ describe('DashboardController', () => {
       expect(mockDashboardView).toHaveBeenCalledWith(
         expect.objectContaining({
           activeView: 'statement',
-          isMobileMenuOpen: true
+          isMobileMenuOpen: true,
         })
       );
     });

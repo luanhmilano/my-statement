@@ -1,0 +1,365 @@
+.tableContainer {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0px 10px 60px rgba(226, 236, 249, 0.5);
+  border: none;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.tableWrapper {
+  flex: 1;
+  overflow: auto;
+  width: 100%;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead {
+  background: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.table th {
+  padding: 24px 20px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 15px;
+  color: #6816D6;
+  border-bottom: 1px solid #E3D1FA;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 20px 20px;
+  font-size: 15px;
+  color: #232323;
+  border-bottom: 1px solid #E6EFF5;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Estilos para valores positivos e negativos */
+.positive {
+  color: #41D4A8;
+  font-weight: 500;
+}
+
+.negative {
+  color: #dc2626;
+  font-weight: 500;
+}
+
+/* Botão de download */
+.downloadButton {
+  background: transparent;
+  color: #123288; 
+  border: 1px solid #123288;
+  border-radius: 5px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.downloadButton:hover {
+  background: #123288;
+  color: #ffffff;
+}
+
+.downloadButton:active {
+  transform: translateY(0);
+}
+
+.descriptionCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Container da paginação fixo na parte inferior */
+.paginationContainer {
+  background: #f8fafc;
+  border-top: 1px solid #e5e7eb;
+  padding: 16px 20px;
+  flex-shrink: 0;
+  z-index: 20;
+}
+
+/* Paginação */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.paginationInfo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pagination button {
+  background: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+  white-space: nowrap;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #4f46e5;
+  transform: translateY(-1px);
+}
+
+.pagination button:disabled {
+  background: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.pageNumbers {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pageNumber {
+  background: transparent;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 40px;
+}
+
+.pageNumber:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.pageNumber.active {
+  background: #6366f1;
+  color: white;
+  border-color: #6366f1;
+}
+
+/* Estilos para o tfoot */
+.table tfoot {
+  background: #f8fafc;
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  border-top: 2px solid #e5e7eb;
+}
+
+.table tfoot th,
+.table tfoot td {
+  padding: 16px 20px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #374151;
+  border-bottom: none;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .tableContainer {
+    max-height: 90vh;
+    min-height: 450px;
+  }
+  
+  .tableWrapper {
+    max-height: calc(90vh - 70px);
+    min-height: 320px;
+  }
+  
+  .table th,
+  .table td {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+  
+  .downloadButton {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tableContainer {
+    max-height: 95vh;
+    min-height: 400px;
+  }
+  
+  .table {
+    min-width: 700px;
+  }
+  
+  .table th,
+  .table td {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+  
+  .paginationContainer {
+    padding: 12px 16px;
+  }
+  
+  .pagination {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .paginationInfo {
+    order: 2;
+    justify-content: center;
+  }
+  
+  .paginationControls {
+    order: 1;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .downloadButton {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tableContainer {
+    max-height: 98vh;
+    min-height: 350px;
+  }
+  
+  .table {
+    min-width: 600px;
+  }
+  
+  .paginationControls {
+    gap: 8px;
+  }
+  
+  .pagination button {
+    padding: 6px 12px;
+    font-size: 12px;
+    min-width: 60px;
+  }
+  
+  .pageNumber {
+    padding: 4px 8px;
+    font-size: 12px;
+    min-width: 32px;
+  }
+  
+  .pageNumbers {
+    gap: 4px;
+  }
+}
+
+/* Estados de loading e empty */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  color: #9ca3af;
+  font-size: 16px;
+}
+
+.empty::before {
+  content: '📋';
+  display: block;
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+/* Animações suaves */
+.table tbody tr {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar personalizada */
+.tableWrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.tableWrapper::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

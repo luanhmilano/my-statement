@@ -28,12 +28,12 @@ export default function DashboardController() {
   };
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen((prev) => !prev);
+    setIsMobileMenuOpen(prev => !prev);
   };
 
   return (
-    <DashboardView 
-      logout={logout} 
+    <DashboardView
+      logout={logout}
       activeView={activeView}
       onNavigate={handleNavigate}
       isMobile={isMobile}

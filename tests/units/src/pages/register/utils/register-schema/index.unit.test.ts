@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { registerSchema, type RegisterData } from '@/pages/register/utils/register-schema';
+import {
+  registerSchema,
+  type RegisterData,
+} from '@/pages/register/utils/register-schema';
 import { describe } from 'vitest';
 
 describe('Register Schema Validation', () => {
@@ -14,7 +17,7 @@ describe('Register Schema Validation', () => {
 
   it('should validate correct data successfully', () => {
     const result = registerSchema.safeParse(validData);
-    
+
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data).toEqual(validData);
@@ -142,7 +145,11 @@ describe('Register Schema Validation', () => {
   });
 
   it('should reject password shorter than 6 characters', () => {
-    const invalidData = { ...validData, password: '12345', confirmPassword: '12345' };
+    const invalidData = {
+      ...validData,
+      password: '12345',
+      confirmPassword: '12345',
+    };
     const result = registerSchema.safeParse(invalidData);
 
     expect(result.success).toBe(false);
@@ -157,7 +164,11 @@ describe('Register Schema Validation', () => {
   });
 
   it('should reject confirmPassword shorter than 6 characters', () => {
-    const invalidData = { ...validData, password: 'password123', confirmPassword: '12345' };
+    const invalidData = {
+      ...validData,
+      password: 'password123',
+      confirmPassword: '12345',
+    };
     const result = registerSchema.safeParse(invalidData);
 
     expect(result.success).toBe(false);
@@ -172,7 +183,11 @@ describe('Register Schema Validation', () => {
   });
 
   it('should reject when passwords do not match', () => {
-    const invalidData = { ...validData, password: 'password123', confirmPassword: 'differentPassword' };
+    const invalidData = {
+      ...validData,
+      password: 'password123',
+      confirmPassword: 'differentPassword',
+    };
     const result = registerSchema.safeParse(invalidData);
 
     expect(result.success).toBe(false);
@@ -202,7 +217,14 @@ describe('Register Schema Validation', () => {
       expect(result.error.issues).toHaveLength(7);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect(result.error.issues.map((issue: any) => issue.path[0])).toEqual(
-        expect.arrayContaining(['lastName', 'firstName', 'email', 'birthdate', 'password', 'confirmPassword'])
+        expect.arrayContaining([
+          'lastName',
+          'firstName',
+          'email',
+          'birthdate',
+          'password',
+          'confirmPassword',
+        ])
       );
     }
   });
@@ -223,11 +245,7 @@ describe('Register Schema Validation', () => {
   });
 
   it('should accept valid ISO date formats', () => {
-    const validDates = [
-      '2000-12-31',
-      '1990-01-01',
-      '2023-06-15',
-    ];
+    const validDates = ['2000-12-31', '1990-01-01', '2023-06-15'];
 
     validDates.forEach(birthdate => {
       const testData = { ...validData, birthdate };
@@ -237,7 +255,11 @@ describe('Register Schema Validation', () => {
   });
 
   it('should accept passwords exactly 6 characters long', () => {
-    const testData = { ...validData, password: '123456', confirmPassword: '123456' };
+    const testData = {
+      ...validData,
+      password: '123456',
+      confirmPassword: '123456',
+    };
     const result = registerSchema.safeParse(testData);
 
     expect(result.success).toBe(true);
@@ -245,7 +267,11 @@ describe('Register Schema Validation', () => {
 
   it('should accept long passwords', () => {
     const longPassword = 'verylongpasswordwithmanychars123!@#';
-    const testData = { ...validData, password: longPassword, confirmPassword: longPassword };
+    const testData = {
+      ...validData,
+      password: longPassword,
+      confirmPassword: longPassword,
+    };
     const result = registerSchema.safeParse(testData);
 
     expect(result.success).toBe(true);
@@ -254,7 +280,7 @@ describe('Register Schema Validation', () => {
   it('should validate whitespace-only strings as invalid for names', () => {
     const testDataLastName = { ...validData, lastName: '   ' };
     const testDataFirstName = { ...validData, firstName: '   ' };
-    
+
     const resultLastName = registerSchema.safeParse(testDataLastName);
     const resultFirstName = registerSchema.safeParse(testDataFirstName);
 

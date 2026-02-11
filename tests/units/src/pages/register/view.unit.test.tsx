@@ -23,17 +23,15 @@ vi.mock('@assets/login-register-image.png', () => ({
 }));
 
 vi.mock('@/pages/register/components/register-form', () => ({
-  default: vi.fn(
-    ({ onSubmit, isLoading, register, handleSubmit, errors }) => (
-      <div data-testid="register-form">
-        <span data-testid="onSubmit">{typeof onSubmit}</span>
-        <span data-testid="isLoading">{isLoading.toString()}</span>
-        <span data-testid="register">{typeof register}</span>
-        <span data-testid="handleSubmit">{typeof handleSubmit}</span>
-        <span data-testid="errors">{typeof errors}</span>
-      </div>
-    )
-  ),
+  default: vi.fn(({ onSubmit, isLoading, register, handleSubmit, errors }) => (
+    <div data-testid="register-form">
+      <span data-testid="onSubmit">{typeof onSubmit}</span>
+      <span data-testid="isLoading">{isLoading.toString()}</span>
+      <span data-testid="register">{typeof register}</span>
+      <span data-testid="handleSubmit">{typeof handleSubmit}</span>
+      <span data-testid="errors">{typeof errors}</span>
+    </div>
+  )),
 }));
 
 describe('RegisterView', () => {

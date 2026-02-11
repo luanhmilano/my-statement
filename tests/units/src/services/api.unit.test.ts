@@ -3,24 +3,26 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 vi.mock('axios', () => ({
   default: {
-    post: vi.fn()
-  }
+    post: vi.fn(),
+  },
 }));
 
 vi.mock('@/utils/get-config', () => ({
   getConfig: vi.fn().mockReturnValue({
     USERS_URL: 'https://api.example.com/users',
-    AUTH_URL: 'https://api.example.com/auth'
-  })
+    AUTH_URL: 'https://api.example.com/auth',
+  }),
 }));
 
 import axios from 'axios';
 import { getConfig } from '@/utils/get-config';
 import type { UserAuthData, UserData } from '@/services/types';
-import { authUser, createUser } from '@/services/api';
+import { authUser, createUser } from '@/services/auth.api';
 
 const mockGetConfig = vi.mocked(getConfig);
-const mockConsoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+const mockConsoleError = vi
+  .spyOn(console, 'error')
+  .mockImplementation(() => {});
 const mockedAxios = axios as any;
 
 describe('createUser', () => {
@@ -37,7 +39,7 @@ describe('createUser', () => {
     vi.clearAllMocks();
     mockGetConfig.mockReturnValue({
       USERS_URL: mockUsersUrl,
-      AUTH_URL: 'https://api.example.com/auth'
+      AUTH_URL: 'https://api.example.com/auth',
     });
   });
 
@@ -103,9 +105,12 @@ describe('createUser', () => {
     mockedAxios.post.mockRejectedValueOnce(mockError);
 
     await expect(createUser(mockUserData)).rejects.toThrow('API Error');
-    
+
     expect(mockConsoleError).toHaveBeenCalledTimes(1);
-    expect(mockConsoleError).toHaveBeenCalledWith('Create user error:', mockError);
+    expect(mockConsoleError).toHaveBeenCalledWith(
+      'Create user error:',
+      mockError
+    );
   });
 
   it('should handle network errors', async () => {
@@ -113,36 +118,45 @@ describe('createUser', () => {
     mockedAxios.post.mockRejectedValueOnce(networkError);
 
     await expect(createUser(mockUserData)).rejects.toThrow('Network Error');
-    
-    expect(mockConsoleError).toHaveBeenCalledWith('Create user error:', networkError);
+
+    expect(mockConsoleError).toHaveBeenCalledWith(
+      'Create user error:',
+      networkError
+    );
   });
 
   it('should handle validation errors from API', async () => {
     const validationError = {
       response: {
         status: 400,
-        data: { message: 'Validation failed' }
-      }
+        data: { message: 'Validation failed' },
+      },
     };
     mockedAxios.post.mockRejectedValueOnce(validationError);
 
     await expect(createUser(mockUserData)).rejects.toEqual(validationError);
-    
-    expect(mockConsoleError).toHaveBeenCalledWith('Create user error:', validationError);
+
+    expect(mockConsoleError).toHaveBeenCalledWith(
+      'Create user error:',
+      validationError
+    );
   });
 
   it('should handle server errors from API', async () => {
     const serverError = {
       response: {
         status: 500,
-        data: { message: 'Internal server error' }
-      }
+        data: { message: 'Internal server error' },
+      },
     };
     mockedAxios.post.mockRejectedValueOnce(serverError);
 
     await expect(createUser(mockUserData)).rejects.toEqual(serverError);
-    
-    expect(mockConsoleError).toHaveBeenCalledWith('Create user error:', serverError);
+
+    expect(mockConsoleError).toHaveBeenCalledWith(
+      'Create user error:',
+      serverError
+    );
   });
 
   it('should work with different user data formats', async () => {
@@ -152,7 +166,7 @@ describe('createUser', () => {
       birthdate: '1992-05-15',
       fullname: 'Jane Smith',
     };
-    
+
     mockedAxios.post.mockResolvedValueOnce({ data: { id: 2 } });
 
     await createUser(differentUserData);
@@ -168,7 +182,7 @@ describe('createUser', () => {
 describe('authUser', () => {
   const mockAuthData: UserAuthData = {
     userid: 'John',
-    password: 'password123'
+    password: 'password123',
   };
 
   const mockAuthUrl = 'https://api.example.com/auth';
@@ -178,13 +192,13 @@ describe('authUser', () => {
     vi.clearAllMocks();
     mockGetConfig.mockReturnValue({
       USERS_URL: 'https://api.example.com/users',
-      AUTH_URL: mockAuthUrl
+      AUTH_URL: mockAuthUrl,
     });
   });
 
   it('should successfully authenticate user and return access token', async () => {
-    mockedAxios.post.mockResolvedValueOnce({ 
-      data: { access_token: mockAccessToken } 
+    mockedAxios.post.mockResolvedValueOnce({
+      data: { access_token: mockAccessToken },
     });
 
     const result = await authUser(mockAuthData);
@@ -203,8 +217,8 @@ describe('authUser', () => {
   });
 
   it('should use correct AUTH_URL from config', async () => {
-    mockedAxios.post.mockResolvedValueOnce({ 
-      data: { access_token: mockAccessToken } 
+    mockedAxios.post.mockResolvedValueOnce({
+      data: { access_token: mockAccessToken },
     });
 
     await authUser(mockAuthData);
@@ -217,8 +231,8 @@ describe('authUser', () => {
   });
 
   it('should stringify auth data correctly', async () => {
-    mockedAxios.post.mockResolvedValueOnce({ 
-      data: { access_token: mockAccessToken } 
+    mockedAxios.post.mockResolvedValueOnce({
+      data: { access_token: mockAccessToken },
     });
 
     await authUser(mockAuthData);
@@ -231,8 +245,8 @@ describe('authUser', () => {
   });
 
   it('should set correct headers', async () => {
-    mockedAxios.post.mockResolvedValueOnce({ 
-      data: { access_token: mockAccessToken } 
+    mockedAxios.post.mockResolvedValueOnce({
+      data: { access_token: mockAccessToken },
     });
 
     await authUser(mockAuthData);
@@ -252,24 +266,32 @@ describe('authUser', () => {
     const mockError = new Error('Authentication failed');
     mockedAxios.post.mockRejectedValueOnce(mockError);
 
-    await expect(authUser(mockAuthData)).rejects.toThrow('Authentication failed');
-    
+    await expect(authUser(mockAuthData)).rejects.toThrow(
+      'Authentication failed'
+    );
+
     expect(mockConsoleError).toHaveBeenCalledTimes(1);
-    expect(mockConsoleError).toHaveBeenCalledWith('Auth user error:', mockError);
+    expect(mockConsoleError).toHaveBeenCalledWith(
+      'Auth user error:',
+      mockError
+    );
   });
 
   it('should handle invalid credentials error', async () => {
     const credentialsError = {
       response: {
         status: 401,
-        data: { message: 'Invalid credentials' }
-      }
+        data: { message: 'Invalid credentials' },
+      },
     };
     mockedAxios.post.mockRejectedValueOnce(credentialsError);
 
     await expect(authUser(mockAuthData)).rejects.toEqual(credentialsError);
-    
-    expect(mockConsoleError).toHaveBeenCalledWith('Auth user error:', credentialsError);
+
+    expect(mockConsoleError).toHaveBeenCalledWith(
+      'Auth user error:',
+      credentialsError
+    );
   });
 
   it('should handle network errors', async () => {
@@ -277,32 +299,38 @@ describe('authUser', () => {
     mockedAxios.post.mockRejectedValueOnce(networkError);
 
     await expect(authUser(mockAuthData)).rejects.toThrow('Network Error');
-    
-    expect(mockConsoleError).toHaveBeenCalledWith('Auth user error:', networkError);
+
+    expect(mockConsoleError).toHaveBeenCalledWith(
+      'Auth user error:',
+      networkError
+    );
   });
 
   it('should handle server errors from API', async () => {
     const serverError = {
       response: {
         status: 500,
-        data: { message: 'Internal server error' }
-      }
+        data: { message: 'Internal server error' },
+      },
     };
     mockedAxios.post.mockRejectedValueOnce(serverError);
 
     await expect(authUser(mockAuthData)).rejects.toEqual(serverError);
-    
-    expect(mockConsoleError).toHaveBeenCalledWith('Auth user error:', serverError);
+
+    expect(mockConsoleError).toHaveBeenCalledWith(
+      'Auth user error:',
+      serverError
+    );
   });
 
   it('should work with different auth data formats', async () => {
     const differentAuthData: UserAuthData = {
       userid: 'Jane',
-      password: 'differentPassword789'
+      password: 'differentPassword789',
     };
-    
-    mockedAxios.post.mockResolvedValueOnce({ 
-      data: { access_token: 'different-token-67890' } 
+
+    mockedAxios.post.mockResolvedValueOnce({
+      data: { access_token: 'different-token-67890' },
     });
 
     const result = await authUser(differentAuthData);
@@ -317,8 +345,8 @@ describe('authUser', () => {
 
   it('should return access_token from response data', async () => {
     const customToken = 'custom-access-token-xyz';
-    mockedAxios.post.mockResolvedValueOnce({ 
-      data: { access_token: customToken } 
+    mockedAxios.post.mockResolvedValueOnce({
+      data: { access_token: customToken },
     });
 
     const result = await authUser(mockAuthData);
