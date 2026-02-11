@@ -3,8 +3,8 @@ import Header from '../components/header';
 import SideMenu from '../components/side-menu';
 import styles from '../styles/dashboard.module.css';
 import HomeView from './home.view';
-import ProfileView from './profile.view';
 import StatementController from '../controllers/statement.controller';
+import ProfileController from '../controllers/profile.controller';
 
 export default function DashboardView({
   logout,
@@ -21,7 +21,7 @@ export default function DashboardView({
       case 'statement':
         return <StatementController />;
       case 'profile':
-        return <ProfileView />;
+        return <ProfileController />;
       default:
         return <HomeView />;
     }

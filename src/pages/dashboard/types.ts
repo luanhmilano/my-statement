@@ -23,6 +23,11 @@ export type NavigationItem =
   | 'settings'
   | 'notifications';
 
+export type ProfileNavigationItem =
+  | 'edit'
+  | 'preferences'
+  | 'security'
+
 export interface HeaderProps {
   onToggleMenu?: () => void;
   isMobile?: boolean;
@@ -61,4 +66,9 @@ export interface PaginatedTableProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
+}
+
+export interface ProfileViewProps {
+  activeView: ProfileNavigationItem;
+  onNavigate: (view: ProfileNavigationItem) => void;
 }

@@ -1,0 +1,120 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.mobileMenuToggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1001;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: none;
+}
+
+.sideMenu {
+  width: 100%;
+  background: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 2rem;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.menuTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.menuNav {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  position: relative;
+  border-bottom: 2px solid transparent;
+  color: rgb(130, 130, 130);
+}
+
+.menuItem:hover {
+  color: var(--primary-color);
+}
+
+.menuItemActive {
+  color: var(--primary-color);
+  border-bottom-color: #000;
+}
+
+.menuIcon {
+  font-size: 1.1rem;
+}
+
+.menuLabel {
+  font-weight: 500;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.profileContent {
+  max-width: 800px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .sideMenuOpen {
+    transform: translateX(0);
+  }
+
+  .sideMenuClosed {
+    transform: translateX(-100%);
+  }
+
+  .mainContent {
+    padding: 1rem;
+  }
+
+  .overlay {
+    display: block;
+  }
+}
