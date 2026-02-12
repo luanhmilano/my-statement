@@ -9,10 +9,5 @@ export default function ProfileController() {
     setActiveView(view);
   };
 
-  return (
-    <ProfileView
-      activeView={activeView}
-      onNavigate={handleNavigate}
-    />
-  );
+  return <ProfileView activeView={activeView} onNavigate={handleNavigate} />;
 }

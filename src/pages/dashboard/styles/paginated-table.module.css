@@ -7,18 +7,25 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
 }
 
 .tableWrapper {
   flex: 1;
   overflow: auto;
   width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
 }
 
 .table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
 .table thead {
@@ -33,8 +40,8 @@
   text-align: left;
   font-weight: 500;
   font-size: 15px;
-  color: #6816D6;
-  border-bottom: 1px solid #E3D1FA;
+  color: #6816d6;
+  border-bottom: 1px solid #e3d1fa;
   letter-spacing: 0.5px;
   white-space: nowrap;
 }
@@ -43,7 +50,7 @@
   padding: 20px 20px;
   font-size: 15px;
   color: #232323;
-  border-bottom: 1px solid #E6EFF5;
+  border-bottom: 1px solid #e6eff5;
   vertical-align: middle;
   white-space: nowrap;
 }
@@ -62,19 +69,19 @@
 
 /* Estilos para valores positivos e negativos */
 .positive {
-  color: #41D4A8;
+  color: #41d4a8 !important;
   font-weight: 500;
 }
 
 .negative {
-  color: #dc2626;
+  color: #dc2626 !important;
   font-weight: 500;
 }
 
 /* Botão de download */
 .downloadButton {
   background: transparent;
-  color: #123288; 
+  color: #123288;
   border: 1px solid #123288;
   border-radius: 5px;
   padding: 8px 20px;
@@ -206,102 +213,28 @@
 
 /* Responsive design */
 @media (max-width: 1024px) {
-  .tableContainer {
-    max-height: 90vh;
-    min-height: 450px;
-  }
-  
-  .tableWrapper {
-    max-height: calc(90vh - 70px);
-    min-height: 320px;
-  }
-  
   .table th,
   .table td {
     padding: 12px 16px;
     font-size: 13px;
   }
-  
-  .downloadButton {
-    padding: 6px 12px;
-    font-size: 11px;
-  }
 }
 
 @media (max-width: 768px) {
-  .tableContainer {
-    max-height: 95vh;
-    min-height: 400px;
-  }
-  
   .table {
     min-width: 700px;
   }
-  
-  .table th,
-  .table td {
-    padding: 10px 12px;
-    font-size: 12px;
-  }
-  
-  .paginationContainer {
-    padding: 12px 16px;
-  }
-  
+
   .pagination {
     flex-direction: column;
     gap: 12px;
   }
-  
-  .paginationInfo {
-    order: 2;
-    justify-content: center;
-  }
-  
-  .paginationControls {
-    order: 1;
-    justify-content: center;
-    width: 100%;
-  }
-  
-  .downloadButton {
-    padding: 4px 8px;
-    font-size: 10px;
+
+  .paginationContainer {
+    padding: 12px;
   }
 }
 
-@media (max-width: 480px) {
-  .tableContainer {
-    max-height: 98vh;
-    min-height: 350px;
-  }
-  
-  .table {
-    min-width: 600px;
-  }
-  
-  .paginationControls {
-    gap: 8px;
-  }
-  
-  .pagination button {
-    padding: 6px 12px;
-    font-size: 12px;
-    min-width: 60px;
-  }
-  
-  .pageNumber {
-    padding: 4px 8px;
-    font-size: 12px;
-    min-width: 32px;
-  }
-  
-  .pageNumbers {
-    gap: 4px;
-  }
-}
-
-/* Estados de loading e empty */
 .loading {
   display: flex;
   justify-content: center;
@@ -319,13 +252,6 @@
   height: 200px;
   color: #9ca3af;
   font-size: 16px;
-}
-
-.empty::before {
-  content: '📋';
-  display: block;
-  font-size: 48px;
-  margin-bottom: 16px;
 }
 
 /* Animações suaves */

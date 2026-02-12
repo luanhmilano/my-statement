@@ -12,8 +12,8 @@ export const getExpensesEarnings = (data: StatementItem[]) => {
     }
   });
 
-  return { 
-    totalEarnings: totalEarnings.toFixed(2), 
-    totalExpenses: totalExpenses.toFixed(2) 
+  return {
+    totalEarnings: totalEarnings.toFixed(2),
+    totalExpenses: totalExpenses.toFixed(2),
   };
 };

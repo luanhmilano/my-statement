@@ -29,7 +29,7 @@ export default function ProfileView({
     <div className={styles.container}>
       <div className={`${styles.sideMenu}`}>
         <nav className={styles.menuNav}>
-          {menuItems.map((item) => (
+          {menuItems.map(item => (
             <button
               key={item.id}
               className={`${styles.menuItem} ${activeView === item.id ? styles.menuItemActive : ''}`}
@@ -43,9 +43,7 @@ export default function ProfileView({
         </nav>
       </div>
       <div className={styles.mainContent}>
-        <div className={styles.profileContent}>
-          {renderActiveView()}
-        </div>
+        <div className={styles.profileContent}>{renderActiveView()}</div>
       </div>
     </div>
   );

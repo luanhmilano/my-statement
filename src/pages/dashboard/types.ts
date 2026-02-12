@@ -23,10 +23,7 @@ export type NavigationItem =
   | 'settings'
   | 'notifications';
 
-export type ProfileNavigationItem =
-  | 'edit'
-  | 'preferences'
-  | 'security'
+export type ProfileNavigationItem = 'edit' | 'preferences' | 'security';
 
 export interface HeaderProps {
   onToggleMenu?: () => void;
