@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   padding-top: 20px;
   gap: 20px;
@@ -19,22 +19,13 @@
   flex-shrink: 0;
 }
 
-/* Área da tabela - permitir scroll e ocupar espaço restante */
-.tableWrapper {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-
 .contentArea {
   flex: 1;
   min-height: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 /* Estados de loading e erro */
