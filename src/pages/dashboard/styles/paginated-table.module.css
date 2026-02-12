@@ -69,12 +69,12 @@
 
 /* Estilos para valores positivos e negativos */
 .positive {
-  color: #41d4a8;
+  color: #41d4a8 !important;
   font-weight: 500;
 }
 
 .negative {
-  color: #dc2626;
+  color: #dc2626 !important;
   font-weight: 500;
 }
 
