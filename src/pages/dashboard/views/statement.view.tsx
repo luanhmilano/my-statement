@@ -18,19 +18,19 @@ export default function StatementView({
           amount={balanceTotal.balance}
           title="Money"
           icon={LuWallet}
-          type='money'
+          type="money"
         />
         <BalanceTop
           amount={balanceTotal.expenses}
           title="Expenses"
           icon={LuReceipt}
-          type='expenses'
+          type="expenses"
         />
         <BalanceTop
           amount={balanceTotal.earnings}
           title="Earnings"
           icon={LuReceipt}
-          type='earnings'
+          type="earnings"
         />
       </div>
 
@@ -44,7 +44,7 @@ export default function StatementView({
       )}
 
       {!loading && !error && (
-        <div className={styles.contentArea}> 
+        <div className={styles.contentArea}>
           <PaginatedTable data={data} />
         </div>
       )}

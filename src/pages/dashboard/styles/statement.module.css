@@ -92,7 +92,7 @@
     padding: 16px;
     gap: 16px;
   }
-  
+
   .balanceTopHeader {
     gap: 16px;
     min-height: 100px;
@@ -113,13 +113,13 @@
     padding: 12px;
     gap: 12px;
   }
-  
+
   .balanceTopHeader {
     gap: 8px;
     min-height: 90px;
     max-height: 90px;
   }
-  
+
   .tableWrapper {
     margin-bottom: 12px;
   }
@@ -137,12 +137,12 @@
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
-  
+
   /* Esconder scrollbar mas manter funcionalidade */
   .balanceTopHeader::-webkit-scrollbar {
     display: none;
   }
-  
+
   .balanceTopHeader {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -154,17 +154,17 @@
     padding: 8px;
     gap: 8px;
   }
-  
+
   .balanceTopHeader {
     min-height: 80px;
     max-height: 80px;
     gap: 4px;
   }
-  
+
   .errorContainer {
     padding: 24px 16px;
   }
-  
+
   .retryButton {
     padding: 10px 20px;
     font-size: 13px;

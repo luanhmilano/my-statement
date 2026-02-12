@@ -60,46 +60,50 @@
   font-weight: 700;
   color: #111827;
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   line-height: 1.2;
   word-break: break-all;
 }
 
 /* Variações de cor para diferentes tipos de balance */
-.balanceTop[data-type="money"] .iconWrapper {
-  background: #E3D1FA;
+.balanceTop[data-type='money'] .iconWrapper {
+  background: #e3d1fa;
 }
 
-.balanceTop[data-type="money"] svg {
-  color: #6816D6;
+.balanceTop[data-type='money'] svg {
+  color: #6816d6;
 }
 
-.balanceTop[data-type="money"] .balanceAmount {
-  color: #6816D6;
+.balanceTop[data-type='money'] .balanceAmount {
+  color: #6816d6;
 }
 
-.balanceTop[data-type="expenses"] .iconWrapper {
+.balanceTop[data-type='expenses'] .iconWrapper {
   background: rgba(220, 38, 38, 0.1);
 }
 
-.balanceTop[data-type="expenses"] svg {
+.balanceTop[data-type='expenses'] svg {
   color: #dc2626;
 }
 
-.balanceTop[data-type="expenses"] .balanceAmount {
+.balanceTop[data-type='expenses'] .balanceAmount {
   color: #dc2626;
 }
 
-.balanceTop[data-type="earnings"] .iconWrapper {
-  background: #CEF7E8;
+.balanceTop[data-type='earnings'] .iconWrapper {
+  background: #cef7e8;
 }
 
-.balanceTop[data-type="earnings"] svg {
-  color: #0CB97B;
+.balanceTop[data-type='earnings'] svg {
+  color: #0cb97b;
 }
 
-.balanceTop[data-type="earnings"] .balanceAmount {
-  color: #0CB97B;
+.balanceTop[data-type='earnings'] .balanceAmount {
+  color: #0cb97b;
 }
 
 /* Responsive design */
@@ -110,17 +114,17 @@
     padding: 18px;
     height: 110px;
   }
-  
+
   .iconWrapper {
     width: 70px;
     height: 50px;
   }
-  
+
   .balanceTop svg {
     width: 22px;
     height: 22px;
   }
-  
+
   .balanceAmount {
     font-size: clamp(18px, 3.5vw, 24px);
   }
@@ -134,21 +138,21 @@
     height: 100px;
     gap: 8px;
   }
-  
+
   .iconWrapper {
     width: 40px;
     height: 30px;
   }
-  
+
   .balanceTop svg {
     width: 20px;
     height: 20px;
   }
-  
+
   .balanceTitle {
     font-size: 11px;
   }
-  
+
   .balanceAmount {
     font-size: clamp(16px, 3vw, 22px);
   }
@@ -162,21 +166,21 @@
     height: 90px;
     gap: 6px;
   }
-  
+
   .iconWrapper {
     width: 50px;
     height: 40px;
   }
-  
+
   .balanceTop svg {
     width: 18px;
     height: 18px;
   }
-  
+
   .balanceTitle {
     font-size: 10px;
   }
-  
+
   .balanceAmount {
     font-size: clamp(14px, 2.5vw, 20px);
   }
@@ -190,21 +194,21 @@
     height: 80px;
     gap: 4px;
   }
-  
+
   .iconWrapper {
     width: 40px;
     height: 32px;
   }
-  
+
   .balanceTop svg {
     width: 16px;
     height: 16px;
   }
-  
+
   .balanceTitle {
     font-size: 9px;
   }
-  
+
   .balanceAmount {
     font-size: clamp(12px, 2vw, 18px);
   }
@@ -218,38 +222,38 @@
     height: 75px;
     gap: 4px;
   }
-  
+
   .iconWrapper {
     width: 28px;
     height: 28px;
   }
-  
+
   .balanceTop svg {
     width: 14px;
     height: 14px;
   }
-  
+
   .balanceTitle {
     font-size: 8px;
   }
-  
+
   .balanceAmount {
     font-size: clamp(11px, 1.8vw, 16px);
   }
 }
 
 /* Estados de hover em diferentes tipos */
-.balanceTop[data-type="money"]:hover .iconWrapper {
+.balanceTop[data-type='money']:hover .iconWrapper {
   background: #d8bef9;
   transform: scale(1.05);
 }
 
-.balanceTop[data-type="expenses"]:hover .iconWrapper {
+.balanceTop[data-type='expenses']:hover .iconWrapper {
   background: rgba(220, 38, 38, 0.2);
   transform: scale(1.05);
 }
 
-.balanceTop[data-type="earnings"]:hover .iconWrapper {
+.balanceTop[data-type='earnings']:hover .iconWrapper {
   background: #b5f9e0;
   transform: scale(1.05);
 }
@@ -313,7 +317,7 @@
 }
 
 /* Ajuste especial para valores muito grandes */
-.balanceAmount[data-large="true"] {
+.balanceAmount[data-large='true'] {
   font-size: clamp(12px, 2vw, 20px);
   line-height: 1.1;
 }

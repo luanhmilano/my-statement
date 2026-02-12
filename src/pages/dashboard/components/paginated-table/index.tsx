@@ -3,16 +3,41 @@ import styles from '../../styles/paginated-table.module.css';
 import type { PaginatedTableProps } from '../../types';
 
 const ArrowUpIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="12" cy="12" r="12" fill="#DCFAF8"/>
-    <path d="M12 7V17M12 7L7 12M12 7L17 12" stroke="#16DBCC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" transform="rotate(0 12 12)"/>
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx="12" cy="12" r="12" fill="#DCFAF8" />
+    <path
+      d="M12 7V17M12 7L7 12M12 7L17 12"
+      stroke="#16DBCC"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      transform="rotate(0 12 12)"
+    />
   </svg>
 );
 
 const ArrowDownIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="12" cy="12" r="12" fill="#FFE0EB"/>
-    <path d="M12 17V7M12 17L7 12M12 17L17 12" stroke="#FF82AC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx="12" cy="12" r="12" fill="#FFE0EB" />
+    <path
+      d="M12 17V7M12 17L7 12M12 17L17 12"
+      stroke="#FF82AC"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
@@ -32,7 +57,7 @@ export default function PaginatedTable({
     return {
       paginatedData: paginated,
       totalPages: pages,
-      totalItems: total
+      totalItems: total,
     };
   }, [data, currentPage]);
 
@@ -83,9 +108,7 @@ export default function PaginatedTable({
   if (!data || data.length === 0) {
     return (
       <div className={styles.tableContainer}>
-        <div className={styles.empty}>
-          No data available
-        </div>
+        <div className={styles.empty}>No data available</div>
       </div>
     );
   }
@@ -108,7 +131,7 @@ export default function PaginatedTable({
           <tbody>
             {paginatedData.map(item => {
               const isNegative = item.type === 'Withdrawal' || item.amount < 0;
-              
+
               return (
                 <tr key={item.id}>
                   <td>
@@ -120,9 +143,19 @@ export default function PaginatedTable({
                   <td>#{item.id}</td>
                   <td>{item.type}</td>
                   <td>{item.card}</td>
-                  <td>{new Date(item.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute:'2-digit' })}</td>
-                  <td className={isNegative ? styles.negative : styles.positive}>
-                    {isNegative ? '-' : '+'}${Math.abs(Number(item.amount)).toLocaleString()}
+                  <td>
+                    {new Date(item.date).toLocaleDateString('en-GB', {
+                      day: 'numeric',
+                      month: 'short',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
+                  </td>
+                  <td
+                    className={isNegative ? styles.negative : styles.positive}
+                  >
+                    {isNegative ? '-' : '+'}$
+                    {Math.abs(Number(item.amount)).toLocaleString()}
                   </td>
                   <td>
                     <button className={styles.downloadButton}>Download</button>
@@ -133,7 +166,7 @@ export default function PaginatedTable({
           </tbody>
         </table>
       </div>
-      
+
       {totalPages > 1 && (
         <div className={styles.paginationContainer}>
           <div className={styles.pagination}>
@@ -142,19 +175,14 @@ export default function PaginatedTable({
                 Showing {startItem}-{endItem} of {totalItems} results
               </span>
             </div>
-            
+
             <div className={styles.paginationControls}>
-              <button
-                onClick={handlePreviousPage}
-                disabled={currentPage === 1}
-              >
+              <button onClick={handlePreviousPage} disabled={currentPage === 1}>
                 Previous
               </button>
-              
-              <div className={styles.pageNumbers}>
-                {renderPageNumbers()}
-              </div>
-              
+
+              <div className={styles.pageNumbers}>{renderPageNumbers()}</div>
+
               <button
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}
