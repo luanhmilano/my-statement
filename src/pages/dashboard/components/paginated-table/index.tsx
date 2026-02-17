@@ -48,7 +48,7 @@ export default function PaginatedTable({
   const [currentPage, setCurrentPage] = useState(1);
 
   const { paginatedData, totalPages, totalItems } = useMemo(() => {
-    const total = data.length;
+    const total = data?.length;
     const pages = Math.ceil(total / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
