@@ -16,9 +16,11 @@ vi.mock('@/pages/dashboard/views/statement.view', () => ({
       <div data-testid="balance">{balanceTotal.balance}</div>
       <div data-testid="expenses">{balanceTotal.expenses}</div>
       <div data-testid="earnings">{balanceTotal.earnings}</div>
-      <button data-testid="retry-button" onClick={onRetry}>Retry</button>
+      <button data-testid="retry-button" onClick={onRetry}>
+        Retry
+      </button>
     </div>
-  ))
+  )),
 }));
 
 vi.mock('@/services/statement.api', () => ({
@@ -41,19 +43,33 @@ const mockUseAuth = vi.mocked(useAuth);
 
 describe('StatementController', () => {
   const mockStatementData: StatementItem[] = [
-    { id: 1, description: 'Test transaction', amount: 100, date: '2023-01-01', type: 'Deposit', card: '1234' },
-    { id: 2, description: 'Another transaction', amount: -50, date: '2023-01-02', type: 'Withdrawal', card: '5678' },
+    {
+      id: 1,
+      description: 'Test transaction',
+      amount: 100,
+      date: '2023-01-01',
+      type: 'Deposit',
+      card: '1234',
+    },
+    {
+      id: 2,
+      description: 'Another transaction',
+      amount: -50,
+      date: '2023-01-02',
+      type: 'Withdrawal',
+      card: '5678',
+    },
   ];
 
   beforeEach(() => {
     vi.clearAllMocks();
     vi.spyOn(console, 'log').mockImplementation(() => {});
-    
-    mockUseAuth.mockReturnValue({ 
+
+    mockUseAuth.mockReturnValue({
       token: 'mock-token',
       isAuthenticated: true,
       login: vi.fn(),
-      logout: vi.fn()
+      logout: vi.fn(),
     });
     mockFetchStatement.mockResolvedValue(mockStatementData);
     mockFetchBalance.mockResolvedValue(1500);
@@ -67,7 +83,7 @@ describe('StatementController', () => {
     act(() => {
       render(<StatementController />);
     });
-    
+
     expect(screen.getByTestId('loading')).toHaveTextContent('true');
     expect(screen.getByTestId('error')).toHaveTextContent('no-error');
     expect(screen.getByTestId('data-length')).toHaveTextContent('0');
@@ -88,7 +104,7 @@ describe('StatementController', () => {
     expect(mockFetchStatement).toHaveBeenCalledWith('mock-token');
     expect(mockFetchBalance).toHaveBeenCalledWith('mock-token');
     expect(mockGetExpensesEarnings).toHaveBeenCalledWith(mockStatementData);
-    
+
     expect(screen.getByTestId('data-length')).toHaveTextContent('2');
     expect(screen.getByTestId('balance')).toHaveTextContent('1500');
     expect(screen.getByTestId('expenses')).toHaveTextContent('50.00');
@@ -97,13 +113,13 @@ describe('StatementController', () => {
   });
 
   it('should handle error when no token is available', async () => {
-    mockUseAuth.mockReturnValue({ 
+    mockUseAuth.mockReturnValue({
       token: null,
       isAuthenticated: false,
       login: vi.fn(),
-      logout: vi.fn()
+      logout: vi.fn(),
     });
-    
+
     act(() => {
       render(<StatementController />);
     });
@@ -112,7 +128,9 @@ describe('StatementController', () => {
       expect(screen.getByTestId('loading')).toHaveTextContent('false');
     });
 
-    expect(screen.getByTestId('error')).toHaveTextContent('No authentication token found.');
+    expect(screen.getByTestId('error')).toHaveTextContent(
+      'No authentication token found.'
+    );
     expect(mockFetchStatement).not.toHaveBeenCalled();
     expect(mockFetchBalance).not.toHaveBeenCalled();
   });
@@ -180,11 +198,11 @@ describe('StatementController', () => {
     mockFetchBalance.mockClear();
 
     // Change token
-    mockUseAuth.mockReturnValue({ 
+    mockUseAuth.mockReturnValue({
       token: 'new-token',
       isAuthenticated: true,
       login: vi.fn(),
-      logout: vi.fn()
+      logout: vi.fn(),
     });
     rerender(<StatementController />);
 

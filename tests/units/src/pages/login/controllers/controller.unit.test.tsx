@@ -261,7 +261,10 @@ describe('LoginController', () => {
 
       const { onSubmit } = mockLoginView.mock.calls[0][0];
       await act(async () => {
-        await onSubmit({ email: 'test@test.com', password: 'pass' } as LoginData);
+        await onSubmit({
+          email: 'test@test.com',
+          password: 'pass',
+        } as LoginData);
       });
 
       expect(consoleWarnSpy).toHaveBeenCalledWith(
@@ -296,7 +299,10 @@ describe('LoginController', () => {
 
       const { onSubmit } = mockLoginView.mock.calls[0][0];
       await act(async () => {
-        await onSubmit({ email: 'test@test.com', password: 'pass' } as LoginData);
+        await onSubmit({
+          email: 'test@test.com',
+          password: 'pass',
+        } as LoginData);
       });
 
       expect(consoleErrorSpy).toHaveBeenCalledWith(
@@ -323,7 +329,10 @@ describe('LoginController', () => {
 
       const { onSubmit } = mockLoginView.mock.calls[0][0];
       await act(async () => {
-        await onSubmit({ email: 'test@test.com', password: 'pass' } as LoginData);
+        await onSubmit({
+          email: 'test@test.com',
+          password: 'pass',
+        } as LoginData);
       });
 
       expect(consoleErrorSpy).toHaveBeenCalledWith(
@@ -351,7 +360,10 @@ describe('LoginController', () => {
 
       const { onSubmit } = mockLoginView.mock.calls[0][0];
       await act(async () => {
-        await onSubmit({ email: 'test@test.com', password: 'pass' } as LoginData);
+        await onSubmit({
+          email: 'test@test.com',
+          password: 'pass',
+        } as LoginData);
       });
 
       expect(consoleErrorSpy).toHaveBeenCalledWith('Unexpected error:', null);
@@ -380,7 +392,6 @@ describe('LoginController', () => {
         await onSubmit(loginData);
       });
 
-
       expect(mockAuthUser).toHaveBeenCalledWith({
         userid: 'user@domain.com',
         password: 'mypassword',
@@ -407,7 +418,7 @@ describe('LoginController', () => {
 
       expect(mockAuthUser).toHaveBeenCalledWith({
         userid: 'test@test.com',
-        password: 'P@ssw0rd123!@#'
+        password: 'P@ssw0rd123!@#',
       });
     });
   });
@@ -416,7 +427,7 @@ describe('LoginController', () => {
     it('should handle multiple successful submissions', async () => {
       const mockToken1 = 'token1';
       const mockToken2 = 'token2';
-      
+
       act(() => {
         render(<LoginController />);
       });

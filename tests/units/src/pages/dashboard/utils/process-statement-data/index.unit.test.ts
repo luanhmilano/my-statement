@@ -13,8 +13,8 @@ describe('processStatementData', () => {
         description: 'Test transaction',
         type: 'Deposit',
         created_at: '2024-01-15T10:30:00Z',
-        amount: '150.50'
-      }
+        amount: '150.50',
+      },
     ];
 
     const result = processStatementData(rawData);
@@ -25,8 +25,8 @@ describe('processStatementData', () => {
       description: 'Test transaction',
       type: 'Deposit',
       date: new Date('2024-01-15T10:30:00Z').toLocaleDateString(),
-      amount: 150.50,
-      card: '**** 1234'
+      amount: 150.5,
+      card: '**** 1234',
     });
   });
 
@@ -36,8 +36,8 @@ describe('processStatementData', () => {
         id: 'test-123',
         type: 'Deposit',
         created_at: '2024-01-15T10:30:00Z',
-        amount: '100.00'
-      }
+        amount: '100.00',
+      },
     ];
 
     const result = processStatementData(rawData);
@@ -51,8 +51,8 @@ describe('processStatementData', () => {
         id: 'test-123',
         description: 'Test transaction',
         created_at: '2024-01-15T10:30:00Z',
-        amount: '100.00'
-      }
+        amount: '100.00',
+      },
     ];
 
     const result = processStatementData(rawData);
@@ -66,8 +66,8 @@ describe('processStatementData', () => {
         id: 'test-123',
         description: 'Test transaction',
         type: 'Deposit',
-        created_at: '2024-01-15T10:30:00Z'
-      }
+        created_at: '2024-01-15T10:30:00Z',
+      },
     ];
 
     const result = processStatementData(rawData);
@@ -82,8 +82,8 @@ describe('processStatementData', () => {
         description: 'Test transaction',
         type: 'Deposit',
         created_at: '2024-01-15T10:30:00Z',
-        amount: 'invalid-amount'
-      }
+        amount: 'invalid-amount',
+      },
     ];
 
     const result = processStatementData(rawData);
@@ -98,8 +98,8 @@ describe('processStatementData', () => {
         description: 'Test transaction',
         type: 'Deposit',
         created_at: '2024-01-15T10:30:00Z',
-        amount: 123.45
-      }
+        amount: 123.45,
+      },
     ];
 
     const result = processStatementData(rawData);
@@ -114,8 +114,8 @@ describe('processStatementData', () => {
         description: 'Test transaction',
         type: 'Deposit',
         created_at: '2024-01-15T10:30:00Z',
-        amount: '100.00'
-      }
+        amount: '100.00',
+      },
     ];
 
     const result = processStatementData(rawData);
@@ -138,8 +138,8 @@ describe('processStatementData', () => {
         type: 'Deposit',
         created_at: '2024-01-15T10:30:00Z',
         amount: '100.00',
-        card: 'some-other-card'
-      }
+        card: 'some-other-card',
+      },
     ];
 
     const result = processStatementData(rawData);
@@ -154,15 +154,15 @@ describe('processStatementData', () => {
         description: 'First transaction',
         type: 'Deposit',
         created_at: '2024-01-15T10:30:00Z',
-        amount: '100.00'
+        amount: '100.00',
       },
       {
         id: 'test-2',
         description: 'Second transaction',
         type: 'Withdrawal',
         created_at: '2024-01-16T14:45:00Z',
-        amount: '50.25'
-      }
+        amount: '50.25',
+      },
     ];
 
     const result = processStatementData(rawData);
@@ -170,7 +170,7 @@ describe('processStatementData', () => {
     expect(result).toHaveLength(2);
     expect(result[0].id).toBe('test-1');
     expect(result[1].id).toBe('test-2');
-    expect(result[0].amount).toBe(100.00);
+    expect(result[0].amount).toBe(100.0);
     expect(result[1].amount).toBe(50.25);
   });
 
@@ -180,13 +180,13 @@ describe('processStatementData', () => {
         description: 'Valid transaction',
         type: 'Deposit',
         created_at: '2024-01-15T10:30:00Z',
-        amount: '100.00'
+        amount: '100.00',
       },
       {
         id: 'test-2',
         created_at: '2024-01-16T14:45:00Z',
-        amount: 'invalid'
-      }
+        amount: 'invalid',
+      },
     ];
 
     const result = processStatementData(rawData);

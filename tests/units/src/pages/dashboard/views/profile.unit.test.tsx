@@ -45,7 +45,9 @@ describe('ProfileView', () => {
       render(<ProfileView {...defaultProps} />);
 
       const editButton = screen.getByRole('button', { name: 'Edit Profile' });
-      const preferencesButton = screen.getByRole('button', { name: 'Preferences' });
+      const preferencesButton = screen.getByRole('button', {
+        name: 'Preferences',
+      });
       const securityButton = screen.getByRole('button', { name: 'Security' });
 
       expect(editButton).toBeInTheDocument();
@@ -59,7 +61,9 @@ describe('ProfileView', () => {
       render(<ProfileView {...defaultProps} activeView="edit" />);
 
       const editButton = screen.getByRole('button', { name: 'Edit Profile' });
-      const preferencesButton = screen.getByRole('button', { name: 'Preferences' });
+      const preferencesButton = screen.getByRole('button', {
+        name: 'Preferences',
+      });
       const securityButton = screen.getByRole('button', { name: 'Security' });
 
       expect(editButton).toHaveClass('menuItem', 'menuItemActive');
@@ -73,7 +77,9 @@ describe('ProfileView', () => {
       render(<ProfileView {...defaultProps} activeView="preferences" />);
 
       const editButton = screen.getByRole('button', { name: 'Edit Profile' });
-      const preferencesButton = screen.getByRole('button', { name: 'Preferences' });
+      const preferencesButton = screen.getByRole('button', {
+        name: 'Preferences',
+      });
       const securityButton = screen.getByRole('button', { name: 'Security' });
 
       expect(preferencesButton).toHaveClass('menuItem', 'menuItemActive');
@@ -88,7 +94,9 @@ describe('ProfileView', () => {
 
       const securityButton = screen.getByRole('button', { name: 'Security' });
       const editButton = screen.getByRole('button', { name: 'Edit Profile' });
-      const preferencesButton = screen.getByRole('button', { name: 'Preferences' });
+      const preferencesButton = screen.getByRole('button', {
+        name: 'Preferences',
+      });
 
       expect(securityButton).toHaveClass('menuItem', 'menuItemActive');
       expect(editButton).toHaveClass('menuItem');
@@ -112,7 +120,9 @@ describe('ProfileView', () => {
     it('calls onNavigate with correct id when preferences menu item is clicked', () => {
       render(<ProfileView {...defaultProps} />);
 
-      const preferencesButton = screen.getByRole('button', { name: 'Preferences' });
+      const preferencesButton = screen.getByRole('button', {
+        name: 'Preferences',
+      });
       fireEvent.click(preferencesButton);
 
       expect(mockOnNavigate).toHaveBeenCalledWith('preferences');
@@ -238,7 +248,7 @@ describe('ProfileView', () => {
       render(<ProfileView {...defaultProps} />);
 
       const buttons = screen.getAllByRole('button');
-      
+
       expect(buttons[0]).toHaveTextContent('Edit Profile');
       expect(buttons[1]).toHaveTextContent('Preferences');
       expect(buttons[2]).toHaveTextContent('Security');

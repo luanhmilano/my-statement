@@ -122,7 +122,6 @@ describe('RegisterController', () => {
         await onSubmit(formData);
       });
 
-
       expect(mockCreateUser).toHaveBeenCalledWith({
         userid: 'john@example.com',
         password: 'password123',
@@ -153,7 +152,6 @@ describe('RegisterController', () => {
       await act(async () => {
         await onSubmit(formData);
       });
-
 
       expect(mockCreateUser).toHaveBeenCalledWith({
         userid: 'mary.jane@example.com',
@@ -217,7 +215,7 @@ describe('RegisterController', () => {
 
       const submitPromise = act(() => {
         onSubmit(formData);
-      }); 
+      });
 
       await waitFor(() => {
         const currentProps = mockRegisterView.mock.lastCall?.[0];
@@ -296,7 +294,6 @@ describe('RegisterController', () => {
         await onSubmit(formData);
       });
 
-
       expect(consoleWarnSpy).toHaveBeenCalledWith(
         'Validation error from API:',
         'Email already exists'
@@ -341,7 +338,6 @@ describe('RegisterController', () => {
       await act(async () => {
         await onSubmit(formData);
       });
-
 
       expect(consoleWarnSpy).toHaveBeenCalledWith(
         'Validation error from API:',
@@ -494,7 +490,6 @@ describe('RegisterController', () => {
         await onSubmit(formData);
       });
 
-
       expect(mockCreateUser).toHaveBeenCalledWith({
         userid: 'user@domain.com', // email transformed to userid
         password: 'password123',
@@ -523,7 +518,6 @@ describe('RegisterController', () => {
       await act(async () => {
         await onSubmit(formData);
       });
-
 
       expect(mockCreateUser).toHaveBeenCalledWith({
         userid: 'test@test.com',
@@ -583,7 +577,6 @@ describe('RegisterController', () => {
         await onSubmit(formData);
       });
 
-
       const payload = mockCreateUser.mock.calls[0][0];
       expect(payload).not.toHaveProperty('confirmPassword');
       expect(Object.keys(payload)).toEqual([
@@ -642,7 +635,7 @@ describe('RegisterController', () => {
       const { onSubmit } = mockRegisterView.mock.calls[0][0];
 
       mockCreateUser.mockRejectedValueOnce(new Error('Network error'));
-      
+
       await act(async () => {
         await onSubmit({
           email: 'fail@test.com',
@@ -653,7 +646,6 @@ describe('RegisterController', () => {
           birthdate: '1990-01-01',
         });
       });
-      
 
       expect(mockNavigate).not.toHaveBeenCalled();
       expect(mockToastError).toHaveBeenCalledTimes(1);
@@ -683,7 +675,6 @@ describe('RegisterController', () => {
         render(<RegisterController />);
       });
 
-
       const { onSubmit } = mockRegisterView.mock.calls[0][0];
       const formData = {
         email: '',
@@ -697,7 +688,6 @@ describe('RegisterController', () => {
       await act(async () => {
         await onSubmit(formData);
       });
-
 
       expect(mockCreateUser).toHaveBeenCalledWith({
         userid: '',
