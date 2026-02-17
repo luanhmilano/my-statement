@@ -2,7 +2,7 @@ import { getConfig, type ConfigProps } from '@/utils/get-config';
 import { describe, it, expect, vi } from 'vitest';
 
 vi.mock('@/utils/get-config', () => ({
-  getConfig: vi.fn()
+  getConfig: vi.fn(),
 }));
 
 describe('getConfig', () => {
@@ -16,7 +16,7 @@ describe('getConfig', () => {
     const mockConfig = {
       USERS_URL: 'https://users.example.com',
       AUTH_URL: 'https://auth.example.com',
-      API_URL: 'https://api.example.com'
+      API_URL: 'https://api.example.com',
     };
 
     mockGetConfig.mockReturnValue(mockConfig);
@@ -26,7 +26,7 @@ describe('getConfig', () => {
     expect(result).toEqual({
       USERS_URL: 'https://users.example.com',
       AUTH_URL: 'https://auth.example.com',
-      API_URL: 'https://api.example.com'
+      API_URL: 'https://api.example.com',
     });
     expect(mockGetConfig).toHaveBeenCalled();
   });
@@ -35,7 +35,7 @@ describe('getConfig', () => {
     const mockConfig = {
       USERS_URL: '',
       AUTH_URL: '',
-      API_URL: ''
+      API_URL: '',
     };
 
     mockGetConfig.mockReturnValue(mockConfig);
@@ -45,7 +45,7 @@ describe('getConfig', () => {
     expect(result).toEqual({
       USERS_URL: '',
       AUTH_URL: '',
-      API_URL: ''
+      API_URL: '',
     });
     expect(mockGetConfig).toHaveBeenCalled();
   });
@@ -54,7 +54,7 @@ describe('getConfig', () => {
     const mockConfig = {
       USERS_URL: 'https://users.example.com',
       AUTH_URL: '',
-      API_URL: 'https://api.example.com'
+      API_URL: 'https://api.example.com',
     };
 
     mockGetConfig.mockReturnValue(mockConfig);
@@ -64,7 +64,7 @@ describe('getConfig', () => {
     expect(result).toEqual({
       USERS_URL: 'https://users.example.com',
       AUTH_URL: '',
-      API_URL: 'https://api.example.com'
+      API_URL: 'https://api.example.com',
     });
     expect(mockGetConfig).toHaveBeenCalled();
   });
@@ -73,7 +73,7 @@ describe('getConfig', () => {
     const mockConfig: ConfigProps = {
       USERS_URL: 'https://users.example.com',
       AUTH_URL: 'https://auth.example.com',
-      API_URL: 'https://api.example.com'
+      API_URL: 'https://api.example.com',
     };
 
     mockGetConfig.mockReturnValue(mockConfig);
@@ -93,7 +93,7 @@ describe('getConfig', () => {
     const mockConfig = {
       USERS_URL: 'https://users.example.com',
       AUTH_URL: 'https://auth.example.com',
-      API_URL: 'https://api.example.com'
+      API_URL: 'https://api.example.com',
     };
 
     mockGetConfig.mockReturnValue(mockConfig);

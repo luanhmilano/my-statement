@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import type { StatementItem, StatementViewProps } from '@/pages/dashboard/types';
+import type {
+  StatementItem,
+  StatementViewProps,
+} from '@/pages/dashboard/types';
 import StatementView from '@/pages/dashboard/views/statement.view';
 
 vi.mock('@/pages/dashboard/styles/statement.module.css', () => ({
@@ -46,13 +49,20 @@ describe('StatementView', () => {
 
   const defaultProps: StatementViewProps = {
     data: [
-      { id: 1, description: 'Test transaction', type: 'Deposit', date: '2024-01-15', amount: 100, card: '**** 1234' }
+      {
+        id: 1,
+        description: 'Test transaction',
+        type: 'Deposit',
+        date: '2024-01-15',
+        amount: 100,
+        card: '**** 1234',
+      },
     ],
     loading: false,
     error: null,
     onRetry: mockOnRetry,
     balanceTotal: {
-      balance: 1000.00,
+      balance: 1000.0,
       expenses: '200.00',
       earnings: '1200.00',
     },
@@ -79,20 +89,32 @@ describe('StatementView', () => {
       // Check Money balance
       const moneyBalance = screen.getByText('BalanceTop - Money');
       expect(moneyBalance).toBeInTheDocument();
-      expect(moneyBalance.closest('[data-testid="balance-top"]')).toHaveAttribute('data-amount', '1000');
-      expect(moneyBalance.closest('[data-testid="balance-top"]')).toHaveAttribute('data-type', 'money');
+      expect(
+        moneyBalance.closest('[data-testid="balance-top"]')
+      ).toHaveAttribute('data-amount', '1000');
+      expect(
+        moneyBalance.closest('[data-testid="balance-top"]')
+      ).toHaveAttribute('data-type', 'money');
 
       // Check Expenses balance
       const expensesBalance = screen.getByText('BalanceTop - Expenses');
       expect(expensesBalance).toBeInTheDocument();
-      expect(expensesBalance.closest('[data-testid="balance-top"]')).toHaveAttribute('data-amount', '200.00');
-      expect(expensesBalance.closest('[data-testid="balance-top"]')).toHaveAttribute('data-type', 'expenses');
+      expect(
+        expensesBalance.closest('[data-testid="balance-top"]')
+      ).toHaveAttribute('data-amount', '200.00');
+      expect(
+        expensesBalance.closest('[data-testid="balance-top"]')
+      ).toHaveAttribute('data-type', 'expenses');
 
       // Check Earnings balance
       const earningsBalance = screen.getByText('BalanceTop - Earnings');
       expect(earningsBalance).toBeInTheDocument();
-      expect(earningsBalance.closest('[data-testid="balance-top"]')).toHaveAttribute('data-amount', '1200.00');
-      expect(earningsBalance.closest('[data-testid="balance-top"]')).toHaveAttribute('data-type', 'earnings');
+      expect(
+        earningsBalance.closest('[data-testid="balance-top"]')
+      ).toHaveAttribute('data-amount', '1200.00');
+      expect(
+        earningsBalance.closest('[data-testid="balance-top"]')
+      ).toHaveAttribute('data-type', 'earnings');
     });
 
     it('passes correct titles to balance top components', () => {
@@ -107,7 +129,7 @@ describe('StatementView', () => {
       const propsWithDecimals = {
         ...defaultProps,
         balanceTotal: {
-          balance: 1250.50,
+          balance: 1250.5,
           expenses: '500.75',
           earnings: '1,751.25',
         },
@@ -118,14 +140,17 @@ describe('StatementView', () => {
       const balanceTopComponents = screen.getAllByTestId('balance-top');
       expect(balanceTopComponents[0]).toHaveAttribute('data-amount', '1250.5');
       expect(balanceTopComponents[1]).toHaveAttribute('data-amount', '500.75');
-      expect(balanceTopComponents[2]).toHaveAttribute('data-amount', '1,751.25');
+      expect(balanceTopComponents[2]).toHaveAttribute(
+        'data-amount',
+        '1,751.25'
+      );
     });
 
     it('renders balance components with zero values', () => {
       const propsWithZeros = {
         ...defaultProps,
         balanceTotal: {
-          balance: 0.00,
+          balance: 0.0,
           expenses: '0.00',
           earnings: '0.00',
         },
@@ -218,7 +243,7 @@ describe('StatementView', () => {
       render(<StatementView {...propsWithError} />);
 
       const retryButton = screen.getByRole('button', { name: 'Retry' });
-      
+
       fireEvent.click(retryButton);
       fireEvent.click(retryButton);
       fireEvent.click(retryButton);
@@ -282,7 +307,9 @@ describe('StatementView', () => {
 
       const { container } = render(<StatementView {...loadingProps} />);
 
-      expect(container.querySelector('.errorContainer')).not.toBeInTheDocument();
+      expect(
+        container.querySelector('.errorContainer')
+      ).not.toBeInTheDocument();
     });
 
     it('does not render content area when loading', () => {
@@ -322,9 +349,30 @@ describe('StatementView', () => {
       const multipleDataProps = {
         ...defaultProps,
         data: [
-          { id: 1, description: 'Transaction 1', type: 'Deposit', date: '2024-01-15', amount: 100, card: '**** 1234' },
-          { id: 2, description: 'Transaction 2', type: 'Withdrawal', date: '2024-01-16', amount: 50, card: '**** 1234' },
-          { id: 3, description: 'Transaction 3', type: 'Transfer', date: '2024-01-17', amount: 25, card: '**** 1234' },
+          {
+            id: 1,
+            description: 'Transaction 1',
+            type: 'Deposit',
+            date: '2024-01-15',
+            amount: 100,
+            card: '**** 1234',
+          },
+          {
+            id: 2,
+            description: 'Transaction 2',
+            type: 'Withdrawal',
+            date: '2024-01-16',
+            amount: 50,
+            card: '**** 1234',
+          },
+          {
+            id: 3,
+            description: 'Transaction 3',
+            type: 'Transfer',
+            date: '2024-01-17',
+            amount: 25,
+            card: '**** 1234',
+          },
         ] as StatementItem[],
       };
 
@@ -362,7 +410,9 @@ describe('StatementView', () => {
       const { container } = render(<StatementView {...defaultProps} />);
 
       const balanceHeader = container.querySelector('.balanceTopHeader');
-      const balanceTopComponents = container.querySelectorAll('[data-testid="balance-top"]');
+      const balanceTopComponents = container.querySelectorAll(
+        '[data-testid="balance-top"]'
+      );
 
       balanceTopComponents.forEach(component => {
         expect(balanceHeader?.contains(component)).toBe(true);
@@ -398,7 +448,9 @@ describe('StatementView', () => {
     it('does not render error container when no error', () => {
       const { container } = render(<StatementView {...defaultProps} />);
 
-      expect(container.querySelector('.errorContainer')).not.toBeInTheDocument();
+      expect(
+        container.querySelector('.errorContainer')
+      ).not.toBeInTheDocument();
     });
 
     it('handles both loading and error states correctly', () => {
@@ -421,12 +473,20 @@ describe('StatementView', () => {
       expect(container.querySelector('.contentArea')).toBeInTheDocument();
 
       // Test with loading
-      const { container: loadingContainer } = render(<StatementView {...defaultProps} loading={true} />);
-      expect(loadingContainer.querySelector('.contentArea')).not.toBeInTheDocument();
+      const { container: loadingContainer } = render(
+        <StatementView {...defaultProps} loading={true} />
+      );
+      expect(
+        loadingContainer.querySelector('.contentArea')
+      ).not.toBeInTheDocument();
 
       // Test with error
-      const { container: errorContainer } = render(<StatementView {...defaultProps} error="Error" />);
-      expect(errorContainer.querySelector('.contentArea')).not.toBeInTheDocument();
+      const { container: errorContainer } = render(
+        <StatementView {...defaultProps} error="Error" />
+      );
+      expect(
+        errorContainer.querySelector('.contentArea')
+      ).not.toBeInTheDocument();
     });
 
     it('prioritizes error display over loading when both are present', () => {
@@ -503,7 +563,7 @@ describe('StatementView', () => {
       const negativeBalanceProps = {
         ...defaultProps,
         balanceTotal: {
-          balance: -250.50,
+          balance: -250.5,
           expenses: '1000.00',
           earnings: '750.00',
         },
@@ -517,20 +577,20 @@ describe('StatementView', () => {
 
     it('maintains component state between prop updates', () => {
       const { rerender } = render(<StatementView {...defaultProps} />);
-      
+
       expect(screen.getByText('PaginatedTable')).toBeInTheDocument();
 
       const updatedProps = {
         ...defaultProps,
         balanceTotal: {
-          balance: 2000.00,
+          balance: 2000.0,
           expenses: '500.00',
           earnings: '2500.00',
         },
       };
 
       rerender(<StatementView {...updatedProps} />);
-      
+
       expect(screen.getByText('PaginatedTable')).toBeInTheDocument();
       const balanceTopComponents = screen.getAllByTestId('balance-top');
       expect(balanceTopComponents[0]).toHaveAttribute('data-amount', '2000');
@@ -559,17 +619,21 @@ describe('StatementView', () => {
 
       render(<StatementView {...propsWithError} />);
 
-      expect(screen.getByText('Unable to fetch statement data. Please check your connection.')).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          'Unable to fetch statement data. Please check your connection.'
+        )
+      ).toBeInTheDocument();
     });
   });
 
   describe('Performance considerations', () => {
     it('does not re-render unnecessarily when props remain the same', () => {
       const { rerender } = render(<StatementView {...defaultProps} />);
-      
+
       // Re-render with same props
       rerender(<StatementView {...defaultProps} />);
-      
+
       expect(screen.getByText('PaginatedTable')).toBeInTheDocument();
       expect(screen.getAllByTestId('balance-top')).toHaveLength(3);
     });
