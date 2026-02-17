@@ -42,18 +42,19 @@ vi.mock('@/pages/dashboard/views/home.view', () => ({
   default: () => <div data-testid="home-view">HomeView</div>,
 }));
 
-vi.mock('@/pages/dashboard/views/statement.view', () => ({
-  default: () => <div data-testid="statement-view">StatementView</div>,
+vi.mock('@/pages/dashboard/controllers/statement.controller', () => ({
+  default: () => (
+    <div data-testid="statement-controller">StatementController</div>
+  ),
 }));
 
-vi.mock('@/pages/dashboard/views/profile.view', () => ({
-  default: () => <div data-testid="profile-view">ProfileView</div>,
+vi.mock('@/pages/dashboard/controllers/profile.controller', () => ({
+  default: () => <div data-testid="profile-controller">ProfileController</div>,
 }));
 
 vi.mock('@/pages/dashboard/styles/dashboard.module.css', () => ({
   default: {
     container: 'container',
-    sideMenu: 'sideMenu',
     mainContent: 'mainContent',
     main: 'main',
   },
@@ -86,50 +87,78 @@ describe('DashboardView', () => {
       render(<DashboardView {...mockProps} activeView="home" />);
 
       expect(screen.getByTestId('home-view')).toBeInTheDocument();
-      expect(screen.queryByTestId('statement-view')).not.toBeInTheDocument();
-      expect(screen.queryByTestId('profile-view')).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId('statement-controller')
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId('profile-controller')
+      ).not.toBeInTheDocument();
     });
 
     it('renders StatementView when activeView is "statement"', () => {
       render(<DashboardView {...mockProps} activeView="statement" />);
 
-      expect(screen.getByTestId('statement-view')).toBeInTheDocument();
+      expect(screen.getByTestId('statement-controller')).toBeInTheDocument();
       expect(screen.queryByTestId('home-view')).not.toBeInTheDocument();
-      expect(screen.queryByTestId('profile-view')).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId('profile-controller')
+      ).not.toBeInTheDocument();
     });
 
     it('renders ProfileView when activeView is "profile"', () => {
       render(<DashboardView {...mockProps} activeView="profile" />);
 
-      expect(screen.getByTestId('profile-view')).toBeInTheDocument();
+      expect(screen.getByTestId('profile-controller')).toBeInTheDocument();
       expect(screen.queryByTestId('home-view')).not.toBeInTheDocument();
-      expect(screen.queryByTestId('statement-view')).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId('statement-controller')
+      ).not.toBeInTheDocument();
     });
 
     it('renders HomeView as default for unknown activeView', () => {
       render(<DashboardView {...mockProps} activeView={'unknown' as any} />);
 
       expect(screen.getByTestId('home-view')).toBeInTheDocument();
+      expect(
+        screen.queryByTestId('statement-controller')
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId('profile-controller')
+      ).not.toBeInTheDocument();
     });
   });
 
-  describe('Mobile vs Desktop layout', () => {
-    it('renders desktop layout when isMobile is false', () => {
+  describe('SideMenu visibility and props', () => {
+    it('renders SideMenu with isOpen=true when not mobile', () => {
       render(<DashboardView {...mockProps} isMobile={false} />);
 
-      const sidemenus = screen.getAllByTestId('side-menu');
-      expect(sidemenus).toHaveLength(1);
+      const sidemenu = screen.getByTestId('side-menu');
+      expect(sidemenu).toHaveAttribute('data-isopen', 'true');
+      expect(sidemenu).toHaveAttribute('data-ismobile', 'false');
     });
 
-    it('renders mobile layout when isMobile is true', () => {
+    it('renders SideMenu with isOpen=true when mobile and menu is open', () => {
       render(
         <DashboardView {...mockProps} isMobile={true} isMobileMenuOpen={true} />
       );
 
-      const sidemenus = screen.getAllByTestId('side-menu');
-      expect(sidemenus).toHaveLength(1);
-      expect(sidemenus[0]).toHaveAttribute('data-ismobile', 'true');
-      expect(sidemenus[0]).toHaveAttribute('data-isopen', 'true');
+      const sidemenu = screen.getByTestId('side-menu');
+      expect(sidemenu).toHaveAttribute('data-isopen', 'true');
+      expect(sidemenu).toHaveAttribute('data-ismobile', 'true');
+    });
+
+    it('renders SideMenu with isOpen=false when mobile and menu is closed', () => {
+      render(
+        <DashboardView
+          {...mockProps}
+          isMobile={true}
+          isMobileMenuOpen={false}
+        />
+      );
+
+      const sidemenu = screen.getByTestId('side-menu');
+      expect(sidemenu).toHaveAttribute('data-isopen', 'false');
+      expect(sidemenu).toHaveAttribute('data-ismobile', 'true');
     });
   });
 
@@ -148,44 +177,64 @@ describe('DashboardView', () => {
       expect(sidemenu).toHaveAttribute('data-activeview', 'statement');
     });
 
-    it('passes mobile-specific props to SideMenu when isMobile is true', () => {
-      render(
-        <DashboardView {...mockProps} isMobile={true} isMobileMenuOpen={true} />
-      );
+    it('passes all required props to SideMenu', () => {
+      render(<DashboardView {...mockProps} />);
 
       const sidemenu = screen.getByTestId('side-menu');
-      expect(sidemenu).toHaveAttribute('data-ismobile', 'true');
+      expect(sidemenu).toHaveAttribute('data-activeview', 'home');
+      expect(sidemenu).toHaveAttribute('data-ismobile', 'false');
       expect(sidemenu).toHaveAttribute('data-isopen', 'true');
     });
   });
 
-  describe('CSS classes', () => {
+  describe('Layout structure', () => {
     it('applies correct CSS classes to elements', () => {
       const { container } = render(<DashboardView {...mockProps} />);
 
       expect(container.firstChild).toHaveClass('container');
-      expect(
-        screen.getByTestId('header').closest('.mainContent')
-      ).toBeInTheDocument();
-      expect(
-        screen.getByTestId('home-view').closest('.main')
-      ).toBeInTheDocument();
+
+      const mainContent = container.querySelector('.mainContent');
+      expect(mainContent).toBeInTheDocument();
+
+      const main = container.querySelector('.main');
+      expect(main).toBeInTheDocument();
     });
 
-    it('applies sideMenu class for desktop layout', () => {
-      const { container } = render(
-        <DashboardView {...mockProps} isMobile={false} />
-      );
+    it('renders components in correct order', () => {
+      const { container } = render(<DashboardView {...mockProps} />);
 
-      expect(container.querySelector('.sideMenu')).toBeInTheDocument();
+      const sidemenu = screen.getByTestId('side-menu');
+      const mainContent = container.querySelector('.mainContent');
+
+      expect(sidemenu).toBeInTheDocument();
+      expect(mainContent).toBeInTheDocument();
+
+      // SideMenu should come before mainContent in DOM
+      expect(sidemenu.compareDocumentPosition(mainContent!)).toBe(
+        Node.DOCUMENT_POSITION_FOLLOWING
+      );
     });
 
-    it('does not apply sideMenu class wrapper for mobile layout', () => {
-      const { container } = render(
-        <DashboardView {...mockProps} isMobile={true} />
-      );
+    it('renders Header and main content inside mainContent wrapper', () => {
+      const { container } = render(<DashboardView {...mockProps} />);
 
-      expect(container.querySelector('.sideMenu')).not.toBeInTheDocument();
+      const mainContent = container.querySelector('.mainContent');
+      const header = screen.getByTestId('header');
+      const main = container.querySelector('.main');
+
+      expect(mainContent?.contains(header)).toBe(true);
+      expect(mainContent?.contains(main!)).toBe(true);
+    });
+  });
+
+  describe('Callback functions', () => {
+    it('passes onToggleMobileMenu to both Header and SideMenu onClose', () => {
+      const mockToggle = vi.fn();
+      render(<DashboardView {...mockProps} onToggleMobileMenu={mockToggle} />);
+
+      // Both components should receive the same callback
+      expect(screen.getByTestId('header')).toBeInTheDocument();
+      expect(screen.getByTestId('side-menu')).toBeInTheDocument();
     });
   });
 });

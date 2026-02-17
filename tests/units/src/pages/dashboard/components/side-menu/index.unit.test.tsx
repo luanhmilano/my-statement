@@ -49,15 +49,15 @@ describe('SideMenu', () => {
   });
 
   describe('Basic rendering', () => {
-    it('renders the logo', () => {
+    it('should renders the logo', () => {
       render(<SideMenu {...mockProps} />);
       const logo = screen.getByAltText('My Statement Logo');
       expect(logo).toBeInTheDocument();
       expect(logo).toHaveAttribute('src', 'mocked-logo.png');
-      expect(logo).toHaveAttribute('width', '200');
+      expect(logo).toHaveAttribute('width', '212');
     });
 
-    it('renders all menu items', () => {
+    it('should renders all menu items', () => {
       render(<SideMenu {...mockProps} />);
 
       expect(screen.getByText('Home')).toBeInTheDocument();
@@ -67,7 +67,7 @@ describe('SideMenu', () => {
       expect(screen.getByText('Logout')).toBeInTheDocument();
     });
 
-    it('renders menu icons', () => {
+    it('should renders menu icons', () => {
       render(<SideMenu {...mockProps} />);
 
       expect(screen.getByTestId('house-icon')).toBeInTheDocument();
@@ -78,7 +78,7 @@ describe('SideMenu', () => {
       expect(screen.getByTestId('logout-icon')).toBeInTheDocument();
     });
 
-    it('renders with proper ARIA labels', () => {
+    it('should renders with proper ARIA labels', () => {
       render(<SideMenu {...mockProps} />);
 
       expect(screen.getByLabelText('Main menu')).toBeInTheDocument();
@@ -87,7 +87,7 @@ describe('SideMenu', () => {
   });
 
   describe('Desktop mode', () => {
-    it('applies desktop container class', () => {
+    it('should applies desktop container class', () => {
       render(<SideMenu {...mockProps} />);
       const container = screen.getByRole('list', {
         name: 'Main menu',
@@ -96,14 +96,14 @@ describe('SideMenu', () => {
       expect(container).not.toHaveClass('mobileContainer');
     });
 
-    it('does not render mobile-specific elements', () => {
+    it('should does not render mobile-specific elements', () => {
       render(<SideMenu {...mockProps} />);
 
       expect(screen.queryByTestId('x-icon')).not.toBeInTheDocument();
       expect(screen.queryByLabelText('Close menu')).not.toBeInTheDocument();
     });
 
-    it('does not render overlay', () => {
+    it('should does not render overlay', () => {
       render(<SideMenu {...mockProps} />);
       expect(document.querySelector('.overlay')).not.toBeInTheDocument();
     });
@@ -112,7 +112,7 @@ describe('SideMenu', () => {
   describe('Mobile mode', () => {
     const mobileProps = { ...mockProps, isMobile: true };
 
-    it('applies mobile container classes when closed', () => {
+    it('should applies mobile container classes when closed', () => {
       render(<SideMenu {...mobileProps} isOpen={false} />);
       const container = screen.getByRole('list', {
         name: 'Main menu',
@@ -121,7 +121,7 @@ describe('SideMenu', () => {
       expect(container).not.toHaveClass('open');
     });
 
-    it('applies open class when mobile menu is open', () => {
+    it('should applies open class when mobile menu is open', () => {
       render(<SideMenu {...mobileProps} isOpen={true} />);
       const container = screen.getByRole('list', {
         name: 'Main menu',
@@ -131,7 +131,7 @@ describe('SideMenu', () => {
       expect(container!.className).toMatch(/open/);
     });
 
-    it('renders close button when mobile', () => {
+    it('should renders close button when mobile', () => {
       render(<SideMenu {...mobileProps} />);
 
       const closeButton = screen.getByLabelText('Close menu');
@@ -139,19 +139,19 @@ describe('SideMenu', () => {
       expect(screen.getByTestId('x-icon')).toBeInTheDocument();
     });
 
-    it('renders overlay when mobile and open', () => {
+    it('should renders overlay when mobile and open', () => {
       render(<SideMenu {...mobileProps} isOpen={true} />);
       expect(screen.getByTestId('mobile-overlay')).toBeInTheDocument();
     });
 
-    it('does not render overlay when mobile and closed', () => {
+    it('should does not render overlay when mobile and closed', () => {
       render(<SideMenu {...mobileProps} isOpen={false} />);
       expect(screen.queryByTestId('mobile-overlay')).not.toBeInTheDocument();
     });
   });
 
   describe('Interactions', () => {
-    it('calls onNavigate when menu item is clicked', () => {
+    it('should calls onNavigate when menu item is clicked', () => {
       render(<SideMenu {...mockProps} />);
 
       fireEvent.click(screen.getByText('Statement'));
@@ -161,21 +161,21 @@ describe('SideMenu', () => {
       expect(mockProps.onNavigate).toHaveBeenCalledWith('profile');
     });
 
-    it('calls logout when logout button is clicked', () => {
+    it('should calls logout when logout button is clicked', () => {
       render(<SideMenu {...mockProps} />);
 
       fireEvent.click(screen.getByLabelText('Logout'));
       expect(mockProps.logout).toHaveBeenCalledOnce();
     });
 
-    it('calls onClose when close button is clicked in mobile', () => {
+    it('should calls onClose when close button is clicked in mobile', () => {
       render(<SideMenu {...mockProps} isMobile={true} />);
 
       fireEvent.click(screen.getByLabelText('Close menu'));
       expect(mockProps.onClose).toHaveBeenCalledOnce();
     });
 
-    it('calls onClose when overlay is clicked in mobile', () => {
+    it('should calls onClose when overlay is clicked in mobile', () => {
       render(<SideMenu {...mockProps} isMobile={true} isOpen={true} />);
 
       const overlay = screen.getByTestId('mobile-overlay');
@@ -185,14 +185,14 @@ describe('SideMenu', () => {
   });
 
   describe('Active state', () => {
-    it('applies selected class to active menu item', () => {
+    it('should applies selected class to active menu item', () => {
       render(<SideMenu {...mockProps} activeView="statement" />);
 
       const statementButton = screen.getByText('Statement').closest('button');
       expect(statementButton).toHaveClass('selected');
     });
 
-    it('does not apply selected class to inactive menu items', () => {
+    it('should does not apply selected class to inactive menu items', () => {
       render(<SideMenu {...mockProps} activeView="statement" />);
 
       const homeButton = screen.getByText('Home').closest('button');
@@ -202,7 +202,7 @@ describe('SideMenu', () => {
       expect(profileButton).not.toHaveClass('selected');
     });
 
-    it('inactive menu items have no additional classes', () => {
+    it('should inactive menu items have no additional classes', () => {
       render(<SideMenu {...mockProps} activeView="home" />);
 
       const statementButton = screen.getByText('Statement').closest('button');

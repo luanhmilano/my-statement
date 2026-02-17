@@ -50,7 +50,7 @@ describe('Header Component', () => {
 
       const menuButton = screen.getByRole('button', { name: 'Open menu' });
       expect(menuButton).toBeInTheDocument();
-      expect(screen.getByTestId('menu-icon')).toBeInTheDocument();
+      expect(screen.getByAltText('User Avatar')).toBeInTheDocument();
     });
 
     it('should not render desktop icon container when isMobile is true', () => {
@@ -106,7 +106,7 @@ describe('Header Component', () => {
 
       expect(screen.getByTestId('settings-icon')).toBeInTheDocument();
       expect(screen.getByTestId('bell-icon')).toBeInTheDocument();
-      expect(screen.getByTestId('user-icon')).toBeInTheDocument();
+      expect(screen.getByTestId('search-icon')).toBeInTheDocument();
     });
   });
 
