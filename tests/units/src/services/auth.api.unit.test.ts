@@ -40,6 +40,7 @@ describe('createUser', () => {
     mockGetConfig.mockReturnValue({
       USERS_URL: mockUsersUrl,
       AUTH_URL: 'https://api.example.com/auth',
+      API_URL: 'https://api.example.com',
     });
   });
 
@@ -193,6 +194,7 @@ describe('authUser', () => {
     mockGetConfig.mockReturnValue({
       USERS_URL: 'https://api.example.com/users',
       AUTH_URL: mockAuthUrl,
+      API_URL: 'https://api.example.com',
     });
   });
 
