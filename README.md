@@ -1,19 +1,31 @@
-# My Statement - Desafio Front-End
+# My Statement - Financial Dashboard App
 
-Uma aplicação web moderna para gerenciamento financeiro pessoal construída com React, TypeScript e Vite. Faz uso de uma API básica para as funcionalidades e geração do extrato.
+Um dashboard financeiro robusto e escalável, desenvolvido com foco em arquitetura limpa, separação de responsabilidades e alta cobertura de testes.
+Atualmente, o projeto contempla o Front-End completo (com API externa), com um roadmap definido para evolução Full-Stack.
 
-## 🚀 Tecnologias Utilizadas
+## 🎯 O Desafio e o Objetivo
+Este projeto nasceu como um Desafio Front-End, mas foi abordado com a mentalidade de um sistema de produção real. O objetivo principal foi implementar uma arquitetura sustentável no ecossistema React, fugindo do acoplamento comum entre lógica de negócio e interface (UI).
 
-- **Frontend**: React 19, TypeScript
-- **Build Tool**: Vite 7
-- **Roteamento**: React Router DOM 7
-- **Formulários**: React Hook Form com validação Zod
-- **Ícones**: React Icons (Lucide)
-- **Notificações**: React Toastify
-- **CSS**: CSS Modules com design responsivo
-- **Testes**: Vitest com Testing Library
-- **Linting**: ESLint com TypeScript
-- **Formatação**: Prettier
+## 🏗️ Decisões Arquiteturais
+
+Para garantir a manutenção e testabilidade a longo prazo, implementei uma variação do padrão **MVC (Model-View-Controller)** adaptado para o React:
+
+* **Controllers (`DashboardController.tsx`):** Responsáveis exclusivamente pela lógica de negócio, chamadas à API, gestão de estado global (Context/Auth) e formatação de dados.
+* **Views (`DashboardView.tsx`):** Componentes de apresentação pura (Dumb Components). Recebem dados e callbacks via props, sem conhecimento da origem dos dados, tornando-os altamente reutilizáveis e fáceis de testar.
+* **Services:** Camada isolada para comunicação externa (Axios), facilitando a troca de fornecedores de dados ou mock de requisições.
+
+## 🧪 Estratégia de Testes
+
+A qualidade foi garantida desde o início utilizando **Vitest, React Testing Library e Jest DOM**. 
+A separação MVC permitiu uma estratégia de testes muito mais eficiente:
+* **Views:** Testadas de forma isolada através da injeção de props fictícias (simulando loading states, sucesso e erro), garantindo que a renderização ocorre perfeitamente sem precisar mockar requisições HTTP complexas.
+* **Controllers:** Testados simulando as respostas dos serviços externos para garantir que o processamento e a entrega de dados para a View ocorrem sem falhas.
+
+## 🛠️ Tecnologias Utilizadas
+* **Front-End:** React, TypeScript, CSS Modules
+* **Formulários & Validação:** React Hook Form + Zod
+* **Testes:** Vitest, React Testing Library
+* **Build Tool:** Vite
 
 ## 📋 Funcionalidades
 
@@ -44,25 +56,11 @@ Uma aplicação web moderna para gerenciamento financeiro pessoal construída co
 - Configurações de preferências
 - Configurações de segurança
 
-## 🏗️ Arquitetura do Projeto
-
-```
-src/
-├── auth/                 # Contexto e hooks de autenticação
-├── components/           # Componentes reutilizáveis
-├── pages/               # Páginas da aplicação
-│   ├── login/           # Página de login
-│   ├── register/        # Página de cadastro
-│   └── dashboard/       # Dashboard principal
-│       ├── components/  # Componentes específicos do dashboard
-│       ├── controllers/ # Controladores com lógica de negócio
-│       ├── views/       # Views com apresentação
-│       ├── styles/      # Estilos CSS Modules
-│       └── utils/       # Utilitários e helpers
-├── services/            # Integração com APIs
-├── utils/               # Utilitários globais
-└── routes.tsx           # Configuração de rotas
-```
+## 🗺️ Roadmap: Rumo ao Full-Stack (Em Breve)
+Para demonstrar o domínio do ciclo de vida completo do software, a próxima iteração deste projeto incluirá um backend próprio, com a seguinte stack:
+* **API:** Node.js com Express
+* **Banco de Dados:** PostgreSQL (gerenciado via Prisma ORM) para garantir a consistência transacional (ACID) dos *statements*.
+* **Segurança:** Autenticação real com JWT.
 
 ## 🔧 Configuração do Ambiente
 
